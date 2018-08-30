@@ -1,126 +1,51 @@
 (function($){
+    var toTop = ($('#sidebar').height() - $(window).height()) + 60;
     // Caption
     $('.article-entry').each(function(i) {
-        $(this).find('img').filter(function (element) {
-            return $(this).hasClass('');
-        }).each(function() {
-            // add image caption
-            if (this.alt && !(!!$.prototype.justifiedGallery && $(this).parent('.justified-gallery').length)) {
+        $(this).find('img').each(function() {
+            if (this.alt) {
                 $(this).after('<span class="caption">' + this.alt + '</span>');
             }
 
-            if ($(this).parent().prop("tagName") !== 'A') {
-                $(this).wrap('<a href="' + ($(this).attr("data-imgbig") ? $(this).attr("data-imgbig") : this.src) + '" title="' + this.alt + '" class="gallery-item"></a>');
-            }
+            $(this).wrap('<a href="' + this.src + '" title="' + this.alt + '" class="gallery-item"></a>');
         });
+
     });
-    if (typeof lightGallery != 'undefined') {
+    if (lightGallery) {
         var options = {
-            selector: '.gallery-item'
+            selector: '.gallery-item',
         };
-        $('.article-entry').each(function(i, entry) {
-            lightGallery(entry, options);
-        });
+        lightGallery($('.article-entry')[0], options);
         lightGallery($('.article-gallery')[0], options);
-    }
-    if (!!$.prototype.justifiedGallery) {  // if justifiedGallery method is defined
-        var options = {
-            rowHeight: 140,
-            margins: 4,
-            lastRow: 'justify'
-        };
-        $('.justified-gallery').justifiedGallery(options);
     }
 
     // Profile card
-    var profileElem = $('#profile');
     $(document).on('click', function () {
-        profileElem.removeClass('card');
+        $('#profile').removeClass('card');
     }).on('click', '#profile-anchor', function (e) {
         e.stopPropagation();
-        profileElem.toggleClass('card');
+        $('#profile').toggleClass('card');
     }).on('click', '.profile-inner', function (e) {
         e.stopPropagation();
     });
 
     // To Top
-    var sidebarElem = $('#sidebar'),
-        toTopElem = $('#toTop');
-
-    (function () {
-        if (!sidebarElem.length) return;
-
-        checkDisplayToTop();
+    if ($('#sidebar').length) {
         $(document).on('scroll', function () {
-            checkDisplayToTop();
-        });
-
-        toTopElem.click(function () {
-            $('body, html').animate({ scrollTop: 0 }, 600);
-        });
-
-        var isToTopDisplayed = false;
-        function checkDisplayToTop() {
-            var toTop = (sidebarElem.height() - $(window).height()) + 60;
-            var currentScrollTop = $(document).scrollTop();
-            var needDisplay = (currentScrollTop > toTop) && (currentScrollTop > 0);
-
             if ($(document).width() >= 800) {
-                if (needDisplay) {
-                    if (isToTopDisplayed) return;
-                    toTopElem.fadeIn();
-                    toTopElem.css('left', sidebarElem.offset().left);
-                    isToTopDisplayed = true;
+                if(($(this).scrollTop() > toTop) && ($(this).scrollTop() > 0)) {
+                    $('#toTop').fadeIn();
+                    $('#toTop').css('left', $('#sidebar').offset().left);
                 } else {
-                    if (!isToTopDisplayed) return;
-                    toTopElem.fadeOut();
-                    isToTopDisplayed = false;
+                    $('#toTop').fadeOut();
                 }
             } else {
-                toTopElem.show();
-                toTopElem.css('right', 20);
+                $('#toTop').fadeIn();
+                $('#toTop').css('right', 20);
             }
-        }
-    })();
-
-    // Fixed Profile
-    (function () {
-        checkFixedProfile();
-        $(document).on('scroll', function () {
-            checkFixedProfile();
+        }).on('click', '#toTop', function () {
+            $('body, html').animate({ scrollTop: 0 }, 600);
         });
-
-        var isFixedProfile = false;
-        function checkFixedProfile() {
-            if (!profileElem.is('.profile-fixed')) return;
-            if ($(document).width() < 800) return;
-
-            var currentScrollTop = $(document).scrollTop();
-            var profileInnerElem = $('#profile .profile-inner');
-            var needFixed = currentScrollTop >= profileElem.offset().top + profileElem.outerHeight(true);
-
-            if (needFixed) {
-                if (isFixedProfile) return;
-
-                profileInnerElem.css('position', 'fixed')
-                    .css('width', profileElem.innerWidth() + 'px')
-                    .css('top', '0');
-
-                // css animation fade-in
-                profileInnerElem.css('animation', '');
-                profileInnerElem.addClass('anim-fade-in');
-                isFixedProfile = true;
-            } else {
-                if (!isFixedProfile) return;
-
-                profileInnerElem.css('position', '')
-                    .css('width', '')
-                    .css('top', '');
-
-                profileInnerElem.css('animation', 'none');
-                isFixedProfile = false;
-            }
-        }
-    })();
+    }
 
 })(jQuery);
