@@ -3,19 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>我的第一篇博客，哈哈哈。。。 | 刘庆龙 | Hekliu</title>
+    <title>学习使用git | 刘庆龙 | Hekliu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="一枚程 90 工程师，爱生活，爱编程">
+    <meta name="description" content="创建markdown文件1touch README.md">
+<meta name="keywords" content="git的使用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的第一篇博客，哈哈哈。。。">
+<meta property="og:title" content="学习使用git">
 <meta property="og:url" content="https://hekliu.github.io/2018/08/30/我的第一篇博客，哈哈哈。。。/index.html">
 <meta property="og:site_name" content="刘庆龙 | Hekliu">
-<meta property="og:description" content="一枚程 90 工程师，爱生活，爱编程">
+<meta property="og:description" content="创建markdown文件1touch README.md">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-30T03:24:03.922Z">
+<meta property="og:updated_time" content="2018-08-31T05:11:59.542Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的第一篇博客，哈哈哈。。。">
-<meta name="twitter:description" content="一枚程 90 工程师，爱生活，爱编程">
+<meta name="twitter:title" content="学习使用git">
+<meta name="twitter:description" content="创建markdown文件1touch README.md">
     
 
     
@@ -164,7 +165,7 @@
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                1
+                2
                 <span>标签</span>
             </div>
         </div>
@@ -202,7 +203,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            我的第一篇博客，哈哈哈。。。
+            学习使用git
         </h1>
     
 
@@ -218,7 +219,17 @@
 
 
                         
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="/categories/git/">git</a>
+    </div>
+
                         
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/git的使用/">git的使用</a>
+    </div>
+
                     </div>
                 
             </header>
@@ -227,7 +238,52 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            
+            <ul>
+<li>创建markdown文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch README.md</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>创建.gitignore文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch .gitignore</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看变化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加所有的变更文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只是提交到本地仓库中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -am &apos;first commit init project&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加到远程仓库中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin ’git地址’</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>本地仓库推送到远程仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line">1.如果是第一次整合项目到git上会提示失败，需要先git pull把现在远程分支上的文件拉到本地</span><br><span class="line">上来，</span><br><span class="line">2.git push -u origin master，</span><br><span class="line">3.如果再报错就强制推上去，git push -u -f origin master;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>查看远程分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在远程master上开一个v1.0分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b v1.0 origin/master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看是否切换到新建的分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>推送分支到远程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin HEAD -u</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
         
         </div>
         <footer class="article-footer">
@@ -237,7 +293,7 @@
 
 </div>
 
-    <a data-url="https://hekliu.github.io/2018/08/30/我的第一篇博客，哈哈哈。。。/" data-id="cjlhdsp3w0001qguxwmmz94l6" class="article-share-link"><i class="fas fa-share"></i>分享到</a>
+    <a data-url="https://hekliu.github.io/2018/08/30/我的第一篇博客，哈哈哈。。。/" data-id="cjlhf5nje00021kuxb52or2ht" class="article-share-link"><i class="fas fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -358,8 +414,8 @@
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/08/30/我的第一篇博客，哈哈哈。。。/" class="title">我的第一篇博客，哈哈哈。。。</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/git/">git</a></p>
+                            <p class="item-title"><a href="/2018/08/30/我的第一篇博客，哈哈哈。。。/" class="title">学习使用git</a></p>
                             <p class="item-date"><time datetime="2018-08-30T03:24:03.000Z" itemprop="datePublished">2018-08-30</time></p>
                         </div>
                     </li>
@@ -389,6 +445,13 @@
 
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
     
         
     <div class="widget-wrap">
@@ -403,7 +466,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试使用/">测试使用</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git的使用/">git的使用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试使用/">测试使用</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -412,7 +475,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/测试使用/" style="font-size: 10px;">测试使用</a>
+            <a href="/tags/git的使用/" style="font-size: 10px;">git的使用</a> <a href="/tags/测试使用/" style="font-size: 10px;">测试使用</a>
         </div>
     </div>
 
