@@ -2,23 +2,25 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>标签: I/O - 刘庆龙 | Hekliu</title>
+<title>单例模式之静态内部类实现 - 刘庆龙 | Hekliu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
-    <meta name="description" content="一枚90后程序员，爱生活，爱编程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="刘庆龙 | Hekliu">
-<meta property="og:url" content="https://hekliu.github.io/tags/I-O/index.html">
+    <meta name="description" content="单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例的特殊类。通过单例模式可以保证系统中，应用该模式的一个类只有一个实例。即一个类只有一个对象实例。">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单例模式之静态内部类实现">
+<meta property="og:url" content="https://hekliu.github.io/2018/10/15/单例模式之静态内部类实现/index.html">
 <meta property="og:site_name" content="刘庆龙 | Hekliu">
-<meta property="og:description" content="一枚90后程序员，爱生活，爱编程">
+<meta property="og:description" content="单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例的特殊类。通过单例模式可以保证系统中，应用该模式的一个类只有一个实例。即一个类只有一个对象实例。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hekliu.github.io/images/og_image.png">
+<meta property="og:image" content="https://hekliu.github.io/images/side-imges/service-7.jpg">
+<meta property="og:updated_time" content="2018-10-15T15:17:17.460Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘庆龙 | Hekliu">
-<meta name="twitter:description" content="一枚90后程序员，爱生活，爱编程">
-<meta name="twitter:image" content="https://hekliu.github.io/images/og_image.png">
+<meta name="twitter:title" content="单例模式之静态内部类实现">
+<meta name="twitter:description" content="单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例的特殊类。通过单例模式可以保证系统中，应用该模式的一个类只有一个实例。即一个类只有一个对象实例。">
+<meta name="twitter:image" content="https://hekliu.github.io/images/side-imges/service-7.jpg">
 
 
 
@@ -88,7 +90,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="刘庆龙 | Hekliu" height="28">
+                <img src="/images/logo.png" alt="单例模式之静态内部类实现" height="28">
             
 			
 			<span class="site-title">刘庆龙 | Hekliu</span>
@@ -134,39 +136,28 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">I/O</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-image">
-        <a href="/2019/10/03/java中的I-O演进之路/" class="image is-7by1">
-            <img class="thumbnail" src="/images/side-imges/service-5.jpg" alt="java中的I/O演进之路">
-        </a>
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/images/side-imges/service-7.jpg" alt="单例模式之静态内部类实现">
+        </span>
     </div>
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-03T15:15:49.000Z">2019-10-03</time>
+                <time class="level-item has-text-grey" datetime="2018-10-15T15:01:55.000Z">2018-10-15</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/netty/">netty</a>
+                <a class="has-link-grey -link" href="/categories/设计模式/">设计模式</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    20 分钟 读完 (大约 3049 个字)
+                    3 分钟 读完 (大约 494 个字)
                 </span>
                 
                 
@@ -175,27 +166,40 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/10/03/java中的I-O演进之路/">java中的I/O演进之路</a>
+                单例模式之静态内部类实现
             
         </h1>
         <div class="content">
-            <h2 id="I-O基础入门"><a href="#I-O基础入门" class="headerlink" title="I/O基础入门"></a>I/O基础入门</h2><p>Java1.4 之前的早期版本，Java对I/O的支持并不完善，开人员在开发高性能I/O程序时是有非常大的困难的,总结有以下几点:</p>
-<ul>
-<li>没有数据缓存区，I/O性能存在问题</li>
-<li>没有C或者C++中的Channel概念，只有输入和输出流</li>
-<li>同步阻塞I/O通行(BIO)，通常会导致通信线程被长时间阻塞。</li>
-<li>文件的字符集有限，硬件移值性不好</li>
-</ul>
+            <p><code>单例模式</code>是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例的特殊类。通过单例模式可以保证系统中，应用该模式的一个类只有一个实例。即一个类只有一个对象实例。<br><a id="more"></a></p>
+<p>最常用的单例模式有恶汉式和懒汉式两种方式，除此之外还有一种通过静态内部类实现的单例模式。</p>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight cs hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span>(<span class="hljs-params"></span>)</span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-keyword">static</span> &#123;</span><br><span class="line">        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"This's static code block!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SingletonHandler</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton singleton = <span class="hljs-keyword">new</span> Singleton();</span><br><span class="line">        <span class="hljs-keyword">static</span> &#123;</span><br><span class="line">            System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"This's innerClass's static code block"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getInstance</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> SingletonHandler.singleton;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"This's display!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingletonTest</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">SingletonTest</span><span class="hljs-params">()</span></span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">        </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">super</span>.run();</span><br><span class="line">            System.out.println(<span class="hljs-string">"Thread running_"</span>+Singleton.getInstance());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        MyThread th1 = <span class="hljs-keyword">new</span> MyThread();</span><br><span class="line">        MyThread th2 = <span class="hljs-keyword">new</span> MyThread();</span><br><span class="line">        MyThread th3 = <span class="hljs-keyword">new</span> MyThread();</span><br><span class="line">        <span class="hljs-comment">/*@1</span></span><br><span class="line"><span class="hljs-comment">        th1.start();</span></span><br><span class="line"><span class="hljs-comment">        th2.start();</span></span><br><span class="line"><span class="hljs-comment">        th3.start();</span></span><br><span class="line"><span class="hljs-comment">        */</span></span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment">/*@2</span></span><br><span class="line"><span class="hljs-comment">        Singleton.display();</span></span><br><span class="line"><span class="hljs-comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="运行结果及解释"><a href="#运行结果及解释" class="headerlink" title="运行结果及解释"></a>运行结果及解释</h3><p><strong>情况一(注释 @1代码，注释 @2的代码)</strong></p>
+<blockquote>
+<p>//运行结果 为空</p>
+</blockquote>
+<p>解释：外部类和内部类都没有加载。</p>
+<p><strong>情况二(执行 @1代码)</strong></p>
+<blockquote>
+<p>//运行结果<br>This’s static code block!<br>This’s innerClass’s static code block<br>Thread running_com.singleton.Singleton@4f19c297<br>Thread running_com.singleton.Singleton@4f19c297<br>Thread running_com.singleton.Singleton@4f19c297<br>解释： 外部类Singleton和内部类SingletonHandler都加载了，因为他们的静态代码块加载了。</p>
+</blockquote>
+<p><strong>情况三(注释 @1代码，执行 @2的代码)</strong></p>
+<blockquote>
+<p>//运行结果<br>This’s static code block!<br>This’s display!<br>解释：外部类加载了，而内部类没有加载，因为加载了类，就一定会执行静态代码块。</p>
+</blockquote>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p><strong>终上实验：</strong>内部类<code>SingletonHandler</code>只有在<code>getInstance()</code>方法第一次调用的时候才会被加载（实现了延迟加载效果），而且其加载过程是线程安全的（实现线程安全）。内部类加载的时候只实例化了一次instance。</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/10/03/java中的I-O演进之路/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/设计模式/">设计模式</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -203,9 +207,57 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/donate/alipay.png" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/donate/wechat.png" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/10/16/对于HashMap的一些疑问/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">对于一些HashMap的一些疑问</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/08/30/学习使用git/">
+                <span class="level-item">学习使用git</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -893,7 +945,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="刘庆龙 | Hekliu" height="28">
+                    <img src="/images/logo.png" alt="单例模式之静态内部类实现" height="28">
                 
 				
 				<span class="site-title">刘庆龙 | Hekliu</span>
