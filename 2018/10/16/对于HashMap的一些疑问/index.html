@@ -13,12 +13,12 @@
 <meta property="og:site_name" content="刘庆龙 | Hekliu">
 <meta property="og:description" content="HashMap的结构数组的寻址快，但是数据的插入与删除速度不行。 链表的插入与删除速度快，但是寻址速度不行。 那有没有一种两者兼具的数据结构，答案肯定是有的，那就是hash表。 HashMap 就是根据 数组+链表的方式组成了hash表：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2018/08/31/5b88e5c230f57.jpg">
-<meta property="og:updated_time" content="2018-10-16T08:54:24.428Z">
+<meta property="og:image" content="https://hekliu.github.io/images/side-imges/service-2.jpg">
+<meta property="og:updated_time" content="2019-09-26T05:59:47.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对于一些HashMap的一些疑问">
 <meta name="twitter:description" content="HashMap的结构数组的寻址快，但是数据的插入与删除速度不行。 链表的插入与删除速度快，但是寻址速度不行。 那有没有一种两者兼具的数据结构，答案肯定是有的，那就是hash表。 HashMap 就是根据 数组+链表的方式组成了hash表：">
-<meta name="twitter:image" content="https://i.loli.net/2018/08/31/5b88e5c230f57.jpg">
+<meta name="twitter:image" content="https://hekliu.github.io/images/side-imges/service-2.jpg">
     
 
     
@@ -162,11 +162,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                3
+                2
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                3
+                2
                 <span>标签</span>
             </div>
         </div>
@@ -241,8 +241,8 @@
             
             <h2 id="HashMap的结构"><a href="#HashMap的结构" class="headerlink" title="HashMap的结构"></a>HashMap的结构</h2><p>数组的寻址快，但是数据的插入与删除速度不行。 链表的插入与删除速度快，但是寻址速度不行。 那有没有一种两者兼具的数据结构，答案肯定是有的，那就是hash表。 HashMap 就是根据 数组+链表的方式组成了hash表：</p>
 <a id="more"></a>
-<p><img src="https://images.gitee.com/uploads/images/2018/0830/173130_ca792251_87650.png" alt="输入图片说明" title="1.png"></p>
-<h2 id="对于HashMap的一些疑问"><a href="#对于HashMap的一些疑问" class="headerlink" title="对于HashMap的一些疑问"></a>对于HashMap的一些疑问</h2><p><img src="https://images.gitee.com/uploads/images/2018/0830/173144_4d97d72f_87650.png" alt="输入图片说明" title="2.png"></p>
+<p><img src="/images/pic-1.png" alt="" title="1.png"></p>
+<h2 id="对于HashMap的一些疑问"><a href="#对于HashMap的一些疑问" class="headerlink" title="对于HashMap的一些疑问"></a>对于HashMap的一些疑问</h2><p><img src="/images/pic-2.png" alt="" title="2.png"></p>
 <h4 id="一、HashMap的resize过程是什么样的？"><a href="#一、HashMap的resize过程是什么样的？" class="headerlink" title="一、HashMap的resize过程是什么样的？"></a>一、HashMap的resize过程是什么样的？</h4><p>HashMap在put的时候会先检查当前数组的length,如果插入新的值的时候使得length &gt; 0.75f <em> size（f 为加载因子，可以在创建hashMap时指定）的话，会将数组进行扩容为当前容量的2倍。 扩容之后必定要将原有hashMap 中的值拷贝到新容量的hashMap 里面，HashMap 默认的容量为16，加载因子为0.75， 也就是说当HashMap 中Entry的个数超过 16 </em> 0.75 = 12时, 会将容量扩充为 16 * 2 = 32，然后重新计算元素在数组中的位置，这是一个非常耗时的操作，所以我们在使用HashMap的时候如果能预先知道Map中元素的大小，预设其大小能够提升其性能。 resize代码：</p>
 <figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//HashMap数组扩容</span></span><br><span class="line"></span><br><span class="line">void resize(int <span class="keyword">new</span><span class="type">Capacity</span>) &#123;</span><br><span class="line"></span><br><span class="line">Entry[] oldTable = table;</span><br><span class="line"></span><br><span class="line">int oldCapacity = oldTable.length;</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果当前的数组长度已经达到最大值，则不在进行调整</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (oldCapacity == MAXIMUM_CAPACITY) &#123;</span><br><span class="line"></span><br><span class="line">threshold = Integer.MAX_VALUE;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//根据传入参数的长度定义新的数组</span></span><br><span class="line"></span><br><span class="line">Entry[] <span class="keyword">new</span><span class="type">Table</span> = <span class="keyword">new</span> <span class="type">Entry</span>[<span class="keyword">new</span><span class="type">Capacity</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//按照新的规则，将旧数组中的元素转移到新数组中</span></span><br><span class="line"></span><br><span class="line">transfer(<span class="keyword">new</span><span class="type">Table</span>);</span><br><span class="line"></span><br><span class="line">table = <span class="keyword">new</span><span class="type">Table</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//更新临界值</span></span><br><span class="line"></span><br><span class="line">threshold = (int)(<span class="keyword">new</span><span class="type">Capacity</span> * loadFactor);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//旧数组中元素往新数组中迁移</span></span><br><span class="line"></span><br><span class="line">void transfer(Entry[] <span class="keyword">new</span><span class="type">Table</span>) &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//旧数组</span></span><br><span class="line"></span><br><span class="line">Entry[] src = table;</span><br><span class="line"></span><br><span class="line"><span class="comment">//新数组长度</span></span><br><span class="line"></span><br><span class="line">int <span class="keyword">new</span><span class="type">Capacity</span> = <span class="keyword">new</span><span class="type">Table</span>.length;</span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历旧数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (int j = <span class="number">0</span>; j &lt; src.length; j++) &#123;</span><br><span class="line"></span><br><span class="line">Entry e = src[j];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (e != <span class="literal">null</span>) &#123;</span><br><span class="line"></span><br><span class="line">src[j] = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line"></span><br><span class="line">Entry next = e.next;</span><br><span class="line"></span><br><span class="line">int i = indexFor(e.hash, <span class="keyword">new</span><span class="type">Capacity</span>);<span class="comment">//放在新数组中的index位置</span></span><br><span class="line"></span><br><span class="line">e.next = <span class="keyword">new</span><span class="type">Table</span>[i];<span class="comment">//实现链表结构，新加入的放在链头，之前的的数据放在链尾</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span><span class="type">Table</span>[i] = e;</span><br><span class="line"></span><br><span class="line">e = next;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">while</span> (e != <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这是1.7中的代码，1.8中引入了红黑树的概念，代码会相对复杂一些。</p>
@@ -267,11 +267,11 @@
 <p>Hashtable(同一把锁) :使用 synchronized 来保证线程安全，效率非常低下。当一个线程访问同步方法时，其他线程也访问同步方法，可能会进入阻塞或轮询状态，如使用 put 添加元素，另一个线程不能使用 put 添加元素，也不能使用 get，竞争会越来越激烈效率越低。</p>
 <h4 id="九、HashMap-多线程操作导致死循环问题"><a href="#九、HashMap-多线程操作导致死循环问题" class="headerlink" title="九、HashMap 多线程操作导致死循环问题"></a>九、HashMap 多线程操作导致死循环问题</h4><p>在多线程下，进行 put 操作会导致 HashMap 死循环，原因在于 HashMap 的扩容 resize()方法。由于扩容是新建一个数组，复制原数据到数组。由于数组下标挂有链表，所以需要复制链表，但是多线程操作有可能导致环形链表。复制链表过程如下:<br>以下模拟2个线程同时扩容。假设，当前 HashMap 的空间为2（临界值为1），hashcode 分别为 0 和 1，在散列地址 0 处有元素 A 和 B，这时候要添加元素 C，C 经过 hash 运算，得到散列地址为 1，这时候由于超过了临界值，空间不够，需要调用 resize 方法进行扩容，那么在多线程条件下，会出现条件竞争，模拟过程如下：</p>
 <p>线程一：读取到当前的 HashMap 情况，在准备扩容时，线程二介入</p>
-<p><img src="https://images.gitee.com/uploads/images/2018/0902/124903_58cfe293_87650.jpeg" alt="输入图片说明" title="11.jpg"></p>
+<p><img src="/images/pic-3.png" alt="" title="3.png"></p>
 <p>线程二：读取 HashMap，进行扩容</p>
-<p><img src="https://images.gitee.com/uploads/images/2018/0902/124909_0bb789e7_87650.jpeg" alt="输入图片说明" title="22.jpg"></p>
+<p><img src="/images/pic-4.png" alt="" title="4.png"></p>
 <p>线程一：继续执行</p>
-<p><img src="https://images.gitee.com/uploads/images/2018/0902/124915_5a89ac2e_87650.jpeg" alt="输入图片说明" title="33.jpg"></p>
+<p><img src="/images/pic-5.png" alt="" title="5.png"></p>
 <p>这个过程为，先将 A 复制到新的 hash 表中，然后接着复制 B 到链头（A 的前边：B.next=A），本来 B.next=null，到此也就结束了（跟线程二一样的过程），但是，由于线程二扩容的原因，将 B.next=A，所以，这里继续复制A，让 A.next=B，由此，环形链表出现：B.next=A; A.next=B</p>
 <h3 id="推荐阅读："><a href="#推荐阅读：" class="headerlink" title="推荐阅读："></a>推荐阅读：</h3><ul>
 <li><a href="https://blog.csdn.net/fjse51/article/details/55260493" target="_blank" rel="noopener">jdk1.8中ConcurrentHashMap的实现原理</a></li>
@@ -290,7 +290,7 @@
 
 </div>
 
-    <a data-url="https://hekliu.github.io/2018/10/16/对于HashMap的一些疑问/" data-id="cjnbhrifq0008ycuxm7z66ery" class="article-share-link"><i class="fas fa-share"></i>分享到</a>
+    <a data-url="https://hekliu.github.io/2018/10/16/对于HashMap的一些疑问/" data-id="ck10ajqc60002jkrfxw45nae2" class="article-share-link"><i class="fas fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -404,7 +404,7 @@
                             <a href="/2018/10/16/对于HashMap的一些疑问/" class="thumbnail">
     
     
-        <span style="background-image:url(https://i.loli.net/2018/08/31/5b88e5c230f57.jpg)" alt="对于一些HashMap的一些疑问" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/side-imges/service-2.jpg)" alt="对于一些HashMap的一些疑问" class="thumbnail-image"></span>
     
 </a>
 
@@ -423,7 +423,7 @@
                             <a href="/2018/08/30/学习使用git/" class="thumbnail">
     
     
-        <span style="background-image:url(https://i.loli.net/2018/08/31/5b88e5c2246a4.jpg)" alt="学习使用git" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/side-imges/service-1.jpg)" alt="学习使用git" class="thumbnail-image"></span>
     
 </a>
 
@@ -433,25 +433,6 @@
                             <p class="item-category"><a class="article-category-link" href="/categories/git/">git</a></p>
                             <p class="item-title"><a href="/2018/08/30/学习使用git/" class="title">学习使用git</a></p>
                             <p class="item-date"><time datetime="2018-08-30T03:24:03.000Z" itemprop="datePublished">2018-08-30</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/08/30/hello-world/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://i.loli.net/2018/08/31/5b88e5c23062b.jpg)" alt="Hello World" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/08/30/hello-world/" class="title">Hello World</a></p>
-                            <p class="item-date"><time datetime="2018-08-30T03:05:36.156Z" itemprop="datePublished">2018-08-30</time></p>
                         </div>
                     </li>
                 
@@ -473,7 +454,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -482,7 +463,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git的使用/">git的使用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试使用/">测试使用</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git的使用/">git的使用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -491,7 +472,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/git的使用/" style="font-size: 10px;">git的使用</a> <a href="/tags/java基础/" style="font-size: 10px;">java基础</a> <a href="/tags/测试使用/" style="font-size: 10px;">测试使用</a>
+            <a href="/tags/git的使用/" style="font-size: 10px;">git的使用</a> <a href="/tags/java基础/" style="font-size: 10px;">java基础</a>
         </div>
     </div>
 
@@ -524,7 +505,7 @@
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 刘庆龙<br>
+            &copy; 2019 刘庆龙<br>
             <span id="busuanzi_container_site_pv">
 			本站总访问量<span id="busuanzi_value_site_pv"></span>次
 			</span>
