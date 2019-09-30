@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8">
+<title>配置docker官方源并用yum安装docker - 刘庆龙 | Hekliu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    <meta name="description" content="一、docker的官方安装文档：https://docs.docker.com/engine/installation/linux/centos/由docker给的文档可以看出它也只是去配置了一个docker的yum源、然后就通过这个源来安装docker了；在这个文档下我们采用手工配置的方式。">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置docker官方源并用yum安装docker">
+<meta property="og:url" content="https://hekliu.github.io/2019/09/30/配置docker官方源并用yum安装docker/index.html">
+<meta property="og:site_name" content="刘庆龙 | Hekliu">
+<meta property="og:description" content="一、docker的官方安装文档：https://docs.docker.com/engine/installation/linux/centos/由docker给的文档可以看出它也只是去配置了一个docker的yum源、然后就通过这个源来安装docker了；在这个文档下我们采用手工配置的方式。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hekliu.github.io/images/side-imges/service-4.jpg">
+<meta property="og:updated_time" content="2019-09-30T09:05:35.367Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="配置docker官方源并用yum安装docker">
+<meta name="twitter:description" content="一、docker的官方安装文档：https://docs.docker.com/engine/installation/linux/centos/由docker给的文档可以看出它也只是去配置了一个docker的yum源、然后就通过这个源来安装docker了；在这个文档下我们采用手工配置的方式。">
+<meta name="twitter:image" content="https://hekliu.github.io/images/side-imges/service-4.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/monokai.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="配置docker官方源并用yum安装docker" height="28">
+            
+			
+			<span class="site-title">刘庆龙 | Hekliu</span>
+			
+            </a>
+			
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">首页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/images/side-imges/service-4.jpg" alt="配置docker官方源并用yum安装docker">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-30T08:12:07.000Z">2019-09-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1223 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                配置docker官方源并用yum安装docker
+            
+        </h1>
+        <div class="content">
+            <h2 id="一、docker的官方安装文档："><a href="#一、docker的官方安装文档：" class="headerlink" title="一、docker的官方安装文档："></a>一、docker的官方安装文档：</h2><p><a href="https://docs.docker.com/engine/installation/linux/centos/" target="_blank" rel="noopener">https://docs.docker.com/engine/installation/linux/centos/</a><br>由docker给的文档可以看出它也只是去配置了一个docker的yum源、然后就通过这个源来安装docker了；在这个文档下我们采用手工配置的方式。</p>
+<a id="more"></a>
+<h2 id="二、配置一个docker用的源："><a href="#二、配置一个docker用的源：" class="headerlink" title="二、配置一个docker用的源："></a>二、配置一个docker用的源：</h2><pre><code>1.为docker 增加一个新的yum配置文件；
+</code></pre><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch /etc/yum<span class="hljs-selector-class">.repos</span><span class="hljs-selector-class">.d</span>/docker.repo</span><br></pre></td></tr></table></figure>
+<pre><code>2.docker.repo的内容如下
+</code></pre><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[docker-ce-stable]</span></span><br><span class="line"><span class="hljs-attr">name</span>=Docker CE Stable - <span class="hljs-variable">$basearch</span></span><br><span class="line"><span class="hljs-attr">baseurl</span>=https://download.docker.com/linux/centos/<span class="hljs-number">7</span>/<span class="hljs-variable">$basearch</span>/stable</span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">0</span> #我把这里设置成了<span class="hljs-number">0</span>、说明我信任了这个源，不对它的rpm进行检察</span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://download.docker.com/linux/centos/gpg</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[docker-ce-stable-debuginfo]</span></span><br><span class="line"><span class="hljs-attr">name</span>=Docker CE Stable - Debuginfo <span class="hljs-variable">$basearch</span></span><br><span class="line"><span class="hljs-attr">baseurl</span>=https://download.docker.com/linux/centos/<span class="hljs-number">7</span>/debug-<span class="hljs-variable">$basearch</span>/stable</span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://download.docker.com/linux/centos/gpg</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[docker-ce-stable-source]</span></span><br><span class="line"><span class="hljs-attr">name</span>=Docker CE Stable - Sources</span><br><span class="line"><span class="hljs-attr">baseurl</span>=https://download.docker.com/linux/centos/<span class="hljs-number">7</span>/source/stable</span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://download.docker.com/linux/centos/gpg</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[docker-ce-edge]</span></span><br><span class="line"><span class="hljs-attr">name</span>=Docker CE Edge - <span class="hljs-variable">$basearch</span></span><br><span class="line"><span class="hljs-attr">baseurl</span>=https://download.docker.com/linux/centos/<span class="hljs-number">7</span>/<span class="hljs-variable">$basearch</span>/edge</span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://download.docker.com/linux/centos/gpg</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[docker-ce-edge-debuginfo]</span></span><br><span class="line"><span class="hljs-attr">name</span>=Docker CE Edge - Debuginfo <span class="hljs-variable">$basearch</span></span><br><span class="line"><span class="hljs-attr">baseurl</span>=https://download.docker.com/linux/centos/<span class="hljs-number">7</span>/debug-<span class="hljs-variable">$basearch</span>/edge</span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://download.docker.com/linux/centos/gpg</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[docker-ce-edge-source]</span></span><br><span class="line"><span class="hljs-attr">name</span>=Docker CE Edge - Sources</span><br><span class="line"><span class="hljs-attr">baseurl</span>=https://download.docker.com/linux/centos/<span class="hljs-number">7</span>/source/edge</span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://download.docker.com/linux/centos/gpg</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[docker-ce-test]</span></span><br><span class="line"><span class="hljs-attr">name</span>=Docker CE Test - <span class="hljs-variable">$basearch</span></span><br><span class="line"><span class="hljs-attr">baseurl</span>=https://download.docker.com/linux/centos/<span class="hljs-number">7</span>/<span class="hljs-variable">$basearch</span>/test</span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://download.docker.com/linux/centos/gpg</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[docker-ce-test-debuginfo]</span></span><br><span class="line"><span class="hljs-attr">name</span>=Docker CE Test - Debuginfo <span class="hljs-variable">$basearch</span></span><br><span class="line"><span class="hljs-attr">baseurl</span>=https://download.docker.com/linux/centos/<span class="hljs-number">7</span>/debug-<span class="hljs-variable">$basearch</span>/test</span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://download.docker.com/linux/centos/gpg</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[docker-ce-test-source]</span></span><br><span class="line"><span class="hljs-attr">name</span>=Docker CE Test - Sources</span><br><span class="line"><span class="hljs-attr">baseurl</span>=https://download.docker.com/linux/centos/<span class="hljs-number">7</span>/source/test</span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://download.docker.com/linux/centos/gpg</span><br></pre></td></tr></table></figure>
+<h2 id="三、安装docker"><a href="#三、安装docker" class="headerlink" title="三、安装docker:"></a>三、安装docker:</h2><figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install docker-<span class="hljs-keyword">ce</span></span><br><span class="line">Loaded plugin<span class="hljs-variable">s:</span> fastestmirror, langpacks</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package docker-<span class="hljs-keyword">ce</span>.x86_64 <span class="hljs-number">0</span>:<span class="hljs-number">17.03</span>.<span class="hljs-number">1</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos will <span class="hljs-keyword">be</span> installed</span><br><span class="line">--&gt; Processing Dependency: docker-<span class="hljs-keyword">ce</span>-selinux &gt;= <span class="hljs-number">17.03</span>.<span class="hljs-number">1</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos <span class="hljs-keyword">for</span> package: docker-<span class="hljs-keyword">ce</span>-<span class="hljs-number">17.03</span>.<span class="hljs-number">1</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package docker-<span class="hljs-keyword">ce</span>-selinux.noarch <span class="hljs-number">0</span>:<span class="hljs-number">17.03</span>.<span class="hljs-number">1</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos will <span class="hljs-keyword">be</span> installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">=====================================================================================================================================</span><br><span class="line"> Package                          Arch                  Version                                Repository                       Size</span><br><span class="line">=====================================================================================================================================</span><br><span class="line">Installin<span class="hljs-variable">g:</span></span><br><span class="line"> docker-<span class="hljs-keyword">ce</span>                        x86_64                <span class="hljs-number">17.03</span>.<span class="hljs-number">1</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos                docker-<span class="hljs-keyword">ce</span>-stable                 <span class="hljs-number">19</span> M</span><br><span class="line">Installing <span class="hljs-keyword">for</span> dependencie<span class="hljs-variable">s:</span></span><br><span class="line"> docker-<span class="hljs-keyword">ce</span>-selinux                noarch                <span class="hljs-number">17.03</span>.<span class="hljs-number">1</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos                docker-<span class="hljs-keyword">ce</span>-stable                 <span class="hljs-number">28</span> <span class="hljs-keyword">k</span></span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=====================================================================================================================================</span><br><span class="line">Install  <span class="hljs-number">1</span> Package (+<span class="hljs-number">1</span> Dependent package)</span><br><span class="line"></span><br><span class="line">Total download size: <span class="hljs-number">19</span> M</span><br><span class="line">Installed size: <span class="hljs-number">19</span> M</span><br><span class="line">Is this ok [<span class="hljs-keyword">y</span>/d/<span class="hljs-keyword">N</span>]: <span class="hljs-keyword">y</span></span><br></pre></td></tr></table></figure>
+<h2 id="四、直接下载rpm包的方式来安装："><a href="#四、直接下载rpm包的方式来安装：" class="headerlink" title="四、直接下载rpm包的方式来安装："></a>四、直接下载rpm包的方式来安装：</h2><p>　　1.我在安装docker的时候发现下载的速度只有 <code>3kB/s</code> ，然而文件大小有<code>19M</code>。就在我感觉安装无望的时候，我机智的想到了自己直接把rpm下载下来，看了下docker.repo 发现centos7的源地址是 <code>https://download.docker.com/linux/centos/7/$basearch/stable</code> 所以我只要去<code>https://download.docker.com/linux/centos/7/x86_64/stable/Packages/</code> 用迅雷(我是会员有加速)把rpm包下载下来就行了。</p>
+<p><strong>下载如下文件：</strong></p>
+<blockquote>
+<p>docker-ce-17.03.0.ce-1.el7.centos.x86_64.rpm<br>docker-ce-selinux-17.03.0.ce-1.el7.centos.noarch.rpm</p>
+</blockquote>
+<h2 id="五、安装docker"><a href="#五、安装docker" class="headerlink" title="五、安装docker:"></a>五、安装docker:</h2><figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">ll</span></span><br><span class="line">total <span class="hljs-number">19096</span></span><br><span class="line">-rwxrwxrwx <span class="hljs-number">1</span> jianglexing jianglexing <span class="hljs-number">19521288</span> May <span class="hljs-number">30</span> <span class="hljs-number">20</span>:<span class="hljs-number">05</span> docker-<span class="hljs-keyword">ce</span>-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.x86_64.rpm</span><br><span class="line">-rw-r--r-- <span class="hljs-number">1</span> jianglexing jianglexing    <span class="hljs-number">29108</span> May <span class="hljs-number">30</span> <span class="hljs-number">20</span>:<span class="hljs-number">15</span> docker-<span class="hljs-keyword">ce</span>-selinux-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.noarch.rpm</span><br><span class="line">[root@workstudio docker]# yum localinstall *</span><br><span class="line">Loaded plugin<span class="hljs-variable">s:</span> fastestmirror, langpacks</span><br><span class="line">Examining docker-<span class="hljs-keyword">ce</span>-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.x86_64.rpm: docker-<span class="hljs-keyword">ce</span>-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.x86_64</span><br><span class="line">Marking docker-<span class="hljs-keyword">ce</span>-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.x86_64.rpm <span class="hljs-keyword">to</span> <span class="hljs-keyword">be</span> installed</span><br><span class="line">Examining docker-<span class="hljs-keyword">ce</span>-selinux-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.noarch.rpm: docker-<span class="hljs-keyword">ce</span>-selinux-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.noarch</span><br><span class="line">Marking docker-<span class="hljs-keyword">ce</span>-selinux-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.noarch.rpm <span class="hljs-keyword">to</span> <span class="hljs-keyword">be</span> installed</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package docker-<span class="hljs-keyword">ce</span>.x86_64 <span class="hljs-number">0</span>:<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos will <span class="hljs-keyword">be</span> installed</span><br><span class="line">---&gt; Package docker-<span class="hljs-keyword">ce</span>-selinux.noarch <span class="hljs-number">0</span>:<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos will <span class="hljs-keyword">be</span> installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">=====================================================================================================================================</span><br><span class="line"> Package                 Arch         Version                          Repository                                               Size</span><br><span class="line">=====================================================================================================================================</span><br><span class="line">Installin<span class="hljs-variable">g:</span></span><br><span class="line"> docker-<span class="hljs-keyword">ce</span>               x86_64       <span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos          /docker-<span class="hljs-keyword">ce</span>-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.x86_64                <span class="hljs-number">65</span> M</span><br><span class="line"> docker-<span class="hljs-keyword">ce</span>-selinux       noarch       <span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos          /docker-<span class="hljs-keyword">ce</span>-selinux-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.noarch        <span class="hljs-number">43</span> <span class="hljs-keyword">k</span></span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">=====================================================================================================================================</span><br><span class="line">Install  <span class="hljs-number">2</span> Packages</span><br><span class="line"></span><br><span class="line">Total size: <span class="hljs-number">65</span> M</span><br><span class="line">Installed size: <span class="hljs-number">65</span> M</span><br><span class="line">Is this ok [<span class="hljs-keyword">y</span>/d/<span class="hljs-keyword">N</span>]: <span class="hljs-keyword">y</span></span><br><span class="line">Downloading package<span class="hljs-variable">s:</span></span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction test</span><br><span class="line">Transaction test succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  Installing : docker-<span class="hljs-keyword">ce</span>-selinux-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.noarch                                                                  <span class="hljs-number">1</span>/<span class="hljs-number">2</span> </span><br><span class="line">setseboo<span class="hljs-variable">l:</span>  SELinux <span class="hljs-keyword">is</span> disabled.</span><br><span class="line">libsemanage.semanage_direct_install_info: Overriding docker module at lower priority <span class="hljs-number">100</span> with module at priority <span class="hljs-number">400</span>.</span><br><span class="line">  Installing : docker-<span class="hljs-keyword">ce</span>-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.x86_64                                                                          <span class="hljs-number">2</span>/<span class="hljs-number">2</span> </span><br><span class="line">  Verifying  : docker-<span class="hljs-keyword">ce</span>-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.x86_64                                                                          <span class="hljs-number">1</span>/<span class="hljs-number">2</span> </span><br><span class="line">  Verifying  : docker-<span class="hljs-keyword">ce</span>-selinux-<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos.noarch                                                                  <span class="hljs-number">2</span>/<span class="hljs-number">2</span> </span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  docker-<span class="hljs-keyword">ce</span>.x86_64 <span class="hljs-number">0</span>:<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos                    docker-<span class="hljs-keyword">ce</span>-selinux.noarch <span class="hljs-number">0</span>:<span class="hljs-number">17.03</span>.<span class="hljs-number">0</span>.<span class="hljs-keyword">ce</span>-<span class="hljs-number">1</span>.el7.centos                   </span><br><span class="line"></span><br><span class="line">Complete!</span><br></pre></td></tr></table></figure>
+<h2 id="六、启动docker"><a href="#六、启动docker" class="headerlink" title="六、启动docker:"></a>六、启动docker:</h2><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@workstudio docker]<span class="hljs-comment"># systemctl start docker</span></span><br><span class="line">[root@workstudio docker]<span class="hljs-comment"># ps -ef | grep docker</span></span><br><span class="line">root       4458      1  1 20<span class="hljs-function">:22</span> ?        00<span class="hljs-function">:00</span><span class="hljs-function">:00</span> <span class="hljs-string">/usr/bin/dockerd</span></span><br><span class="line">root       4465   4458  0 20<span class="hljs-function">:22</span> ?        00<span class="hljs-function">:00</span><span class="hljs-function">:00</span> docker-containerd -l unix:<span class="hljs-string">///var/run/docker/libcontainerd/docker-containerd.sock</span> <span class="hljs-params">--metrics-interval=0</span> <span class="hljs-params">--start-timeout</span> 2m <span class="hljs-params">--state-dir</span> <span class="hljs-string">/var/run/docker/libcontainerd/containerd</span> <span class="hljs-params">--shim</span> docker-containerd-shim <span class="hljs-params">--runtime</span> docker-runc</span><br><span class="line">root       4589   4333  0 20<span class="hljs-function">:22</span> pts/1    00<span class="hljs-function">:00</span><span class="hljs-function">:00</span> grep <span class="hljs-params">--color=auto</span> docker</span><br></pre></td></tr></table></figure>
+<h2 id="七、测试docker是否能成功运行："><a href="#七、测试docker是否能成功运行：" class="headerlink" title="七、测试docker是否能成功运行："></a>七、测试docker是否能成功运行：</h2><figure class="highlight sqf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@workstudio docker]<span class="hljs-meta"># docker run hello-world</span></span><br><span class="line">Unable <span class="hljs-keyword">to</span> <span class="hljs-built_in">find</span> <span class="hljs-built_in">image</span> <span class="hljs-string">'hello-world:latest'</span> locally</span><br><span class="line">latest: Pulling <span class="hljs-keyword">from</span> library/hello-world</span><br><span class="line"><span class="hljs-number">78445</span>dd45222: Pull complete </span><br><span class="line">Digest: sha256:c5515758d4c5e1e838e9cd307f6c6a0d620b5e07e6f927b07d05f6d12a1ac8d7</span><br><span class="line">Status: Downloaded newer <span class="hljs-built_in">image</span> <span class="hljs-keyword">for</span> hello-world:latest</span><br><span class="line"></span><br><span class="line">Hello <span class="hljs-keyword">from</span> Docker!</span><br><span class="line">This message shows that your installation appears <span class="hljs-keyword">to</span> be working correctly.</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">To</span> generate this message, Docker took the following steps:</span><br><span class="line"> <span class="hljs-number">1</span>. The Docker client contacted the Docker daemon.</span><br><span class="line"> <span class="hljs-number">2</span>. The Docker daemon pulled the <span class="hljs-string">"hello-world"</span> <span class="hljs-built_in">image</span> <span class="hljs-keyword">from</span> the Docker Hub.</span><br><span class="line"> <span class="hljs-number">3</span>. The Docker daemon created a new container <span class="hljs-keyword">from</span> that <span class="hljs-built_in">image</span> which runs the</span><br><span class="line">    executable that produces the output you are currently reading.</span><br><span class="line"> <span class="hljs-number">4</span>. The Docker daemon streamed that output <span class="hljs-keyword">to</span> the Docker client, which sent it</span><br><span class="line">    <span class="hljs-keyword">to</span> your terminal.</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">To</span> <span class="hljs-keyword">try</span> something more ambitious, you can run an Ubuntu container <span class="hljs-keyword">with</span>:</span><br><span class="line"> $ docker run -it ubuntu bash</span><br><span class="line"></span><br><span class="line">Share images, automate workflows, <span class="hljs-built_in">and</span> more <span class="hljs-keyword">with</span> a free Docker ID:</span><br><span class="line"> https:<span class="hljs-comment">//cloud.docker.com/</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">For</span> more examples <span class="hljs-built_in">and</span> ideas, visit:</span><br><span class="line"> https:<span class="hljs-comment">//docs.docker.com/engine/userguide/</span></span><br></pre></td></tr></table></figure>
+<p>如果是第一次运行 <code>hello-world</code> ，这个 <code>docker-image</code> 由于它还不存在于本地，所以要下载它，这可能要用一点时间！</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/docker/">docker</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/donate/alipay.png" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/donate/wechat.png" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/09/30/tomcat出现的PermGen-Space问题/">
+                <span class="level-item">tomcat出现的PermGen Space问题</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="刘庆龙 | Hekliu">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        刘庆龙 | Hekliu
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        不为失败找借口，只为成功找方法！
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>深圳, 中国</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://hekliu.github.io" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://hekliu.github.io">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Gitee" href="https://hekliu.github.io">
+                
+                <i class="fab fa-gg"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div id="aplayer"></div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="http://120.79.4.133:18080" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">mblog</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">120.79.4.133</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://hekliu.github.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">刘庆龙 | Hekliu</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hekliu.github.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/docker/">
+            <span class="level-start">
+                <span class="level-item">docker</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/git/">
+            <span class="level-start">
+                <span class="level-item">git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/java/">
+            <span class="level-start">
+                <span class="level-item">java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/tomcat/">
+            <span class="level-start">
+                <span class="level-item">tomcat</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git的使用/" style="font-size: 10px;">git的使用</a> <a href="/tags/java基础/" style="font-size: 20px;">java基础</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/30/配置docker官方源并用yum安装docker/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/side-imges/service-4.jpg" alt="配置docker官方源并用yum安装docker">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-30T08:12:07.000Z">2019-09-30</time></div>
+                    <a href="/2019/09/30/配置docker官方源并用yum安装docker/" class="title has-link-black-ter is-size-6 has-text-weight-normal">配置docker官方源并用yum安装docker</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/30/tomcat出现的PermGen-Space问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/side-imges/service-3.jpg" alt="tomcat出现的PermGen Space问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-30T06:04:27.000Z">2019-09-30</time></div>
+                    <a href="/2019/09/30/tomcat出现的PermGen-Space问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">tomcat出现的PermGen Space问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/tomcat/">tomcat</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/16/对于HashMap的一些疑问/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/side-imges/service-2.jpg" alt="对于一些HashMap的一些疑问">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-16T08:46:03.000Z">2018-10-16</time></div>
+                    <a href="/2018/10/16/对于HashMap的一些疑问/" class="title has-link-black-ter is-size-6 has-text-weight-normal">对于一些HashMap的一些疑问</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/java/">java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/30/学习使用git/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/side-imges/service-1.jpg" alt="学习使用git">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-30T03:24:03.000Z">2018-08-30</time></div>
+                    <a href="/2018/08/30/学习使用git/" class="title has-link-black-ter is-size-6 has-text-weight-normal">学习使用git</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/git/">git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git的使用/">
+                        <span class="tag">git的使用</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/java基础/">
+                        <span class="tag">java基础</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/30/配置docker官方源并用yum安装docker/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/side-imges/service-4.jpg" alt="配置docker官方源并用yum安装docker">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-30T08:12:07.000Z">2019-09-30</time></div>
+                    <a href="/2019/09/30/配置docker官方源并用yum安装docker/" class="title has-link-black-ter is-size-6 has-text-weight-normal">配置docker官方源并用yum安装docker</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/30/tomcat出现的PermGen-Space问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/side-imges/service-3.jpg" alt="tomcat出现的PermGen Space问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-30T06:04:27.000Z">2019-09-30</time></div>
+                    <a href="/2019/09/30/tomcat出现的PermGen-Space问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">tomcat出现的PermGen Space问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/tomcat/">tomcat</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/16/对于HashMap的一些疑问/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/side-imges/service-2.jpg" alt="对于一些HashMap的一些疑问">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-16T08:46:03.000Z">2018-10-16</time></div>
+                    <a href="/2018/10/16/对于HashMap的一些疑问/" class="title has-link-black-ter is-size-6 has-text-weight-normal">对于一些HashMap的一些疑问</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/java/">java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/30/学习使用git/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/side-imges/service-1.jpg" alt="学习使用git">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-30T03:24:03.000Z">2018-08-30</time></div>
+                    <a href="/2018/08/30/学习使用git/" class="title has-link-black-ter is-size-6 has-text-weight-normal">学习使用git</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/git/">git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git的使用/">
+                        <span class="tag">git的使用</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/java基础/">
+                        <span class="tag">java基础</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="配置docker官方源并用yum安装docker" height="28">
+                
+				
+				<span class="site-title">刘庆龙 | Hekliu</span>
+				
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 刘庆龙
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+	
+	<!-- 雪花特效 -->
+	<script type="text/javascript" src="/js/snow.js"></script>
+	<!-- 点击显示爱心特效 -->
+	<script type="text/javascript" src="/js/love.js"></script>
+	<!-- 点击显示文字特效 -->
+	<script type="text/javascript" src="/js/click_show_text.js"></script>
+	<!-- 引用aplayer -->
+	<link rel="stylesheet" href="/css/APlayer.min.css">
+	<script type="text/javascript" src="/js/APlayer.min.js"></script>
+	<script type="text/javascript" src="/js/music.js"></script>
+</body>
+</html>
