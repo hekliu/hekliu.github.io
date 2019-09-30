@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hekliu.github.io/"/>
-  <updated>2019-09-26T05:59:47.333Z</updated>
+  <updated>2019-09-30T06:58:19.195Z</updated>
   <id>https://hekliu.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>tomcat出现的PermGen Space问题</title>
+    <link href="https://hekliu.github.io/2019/09/30/tomcat%E5%87%BA%E7%8E%B0%E7%9A%84PermGen-Space%E9%97%AE%E9%A2%98/"/>
+    <id>https://hekliu.github.io/2019/09/30/tomcat出现的PermGen-Space问题/</id>
+    <published>2019-09-30T06:04:27.000Z</published>
+    <updated>2019-09-30T06:58:19.195Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p>最近做项目碰到了让我纠结的问题，tomcat服务器运行一段时间，总是会自动报异常：<code>java.lang.OutOfmemoryError: PermGen Space</code> 的错误，导致项目无法正常运行。</p><a id="more"></a><h2 id="介绍："><a href="#介绍：" class="headerlink" title="介绍："></a>介绍：</h2><p>PermGen Space：指的是内存的永久保存区，该块内存主要是被JVM用来存放class和mete信息的，当class被加载loader 的时候就会被存储到该内存区中，与存放类的实例的 <code>heap</code> 区不同，java中的 <code>垃圾回收器GC</code> 不会在主程序运行期对PermGen space进行清理。</p><h2 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h2><p>当我们的应用中有很多的class时，很可能就会出现PermGen space的错误。<br>我们的tomcat在重启的时候，不是使用的 <code>./bin/shutdown.sh</code> 而是使用<code>kill -9 xxx</code>直接杀掉，这样的话，存在PermGen space里面的内存不会被释放的，这样多长进行 <code>kill</code> 之后，就会导致系统的内存被渐渐吃完了，直到最后tomcat报错。</p><h2 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h2><p><strong>手动设置 <code>MaxPermSize</code> 的大小</strong></p><p>1.修改 <code>TOMCAT_HOME/bin/catalina.bat</code>文件<br>在<code>echo &quot;using CATALINA_BASE：$CATALINA_BASE&quot;</code>上面加入这一行内容：<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">JAVA_OPTS</span>=%JAVA_OPTS% -server -XX:<span class="hljs-attribute">PermSize</span>=128m -XX:<span class="hljs-attribute">MaxPermSize</span>=512m</span><br></pre></td></tr></table></figure></p><p>2.如果是 <code>linux</code> 环境，则修改 <code>TOMCAT_HOME/bin/catalina.sh</code>:<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">JAVA_OPTS</span>=<span class="hljs-string">"<span class="hljs-variable">$JAVA_OPTS</span>"</span> -server -XX:<span class="hljs-attribute">PermSize</span>=128m -XX:<span class="hljs-attribute">MaxSize</span>=512m</span><br></pre></td></tr></table></figure></p><p>3.修改 <code>TOMCAT_HOME/bin/catalina.bat</code> 文件的内容：<br>在 <code>%_EXECJAVA% %JAVA_OPTS%</code> 后面添加 <code>-Xms=256m -Xmx512m</code> </p><p><strong><em>注意：前后有空格的</em></strong><br><strong><em>例如： <code>%_EXECJAVA% %JAVA_OPTS% -Xms=256m -Xmx512m(空格)</code>后面的内容不变</em></strong></p><p>1.在关闭重启 <code>tomcat</code> 的过程中使用 <code>shutdown.sh</code> 而不是 使用 <code>kill -9</code> </p><p>2.如果使用 <code>shutdown.sh</code> 不能将<code>tomcat</code>关掉的话，就必须要使用 <code>kill -9</code> 来关闭了，这个时候只有手动的来回收垃圾了： 在 <code>linux</code> 命令下执行如下的命令，把缓存给丢弃掉。</p><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="hljs-number">3</span> &gt; <span class="hljs-regexp">/proc/</span>sys<span class="hljs-regexp">/vm/</span>drop_caches</span><br></pre></td></tr></table></figure><blockquote><p>关于 <code>drop_caches</code>内容可以参考：<a href="https://blog.csdn.net/wyzxg/article/details/7279986" target="_blank" rel="noopener">drop_caches</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题：&quot;&gt;&lt;a href=&quot;#问题：&quot; class=&quot;headerlink&quot; title=&quot;问题：&quot;&gt;&lt;/a&gt;问题：&lt;/h2&gt;&lt;p&gt;最近做项目碰到了让我纠结的问题，tomcat服务器运行一段时间，总是会自动报异常：&lt;code&gt;java.lang.OutOfmemoryError: PermGen Space&lt;/code&gt; 的错误，导致项目无法正常运行。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tomcat" scheme="https://hekliu.github.io/categories/tomcat/"/>
+    
+    
+      <category term="java基础" scheme="https://hekliu.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>对于一些HashMap的一些疑问</title>
