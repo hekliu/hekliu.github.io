@@ -2,25 +2,23 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>对于一些HashMap的一些疑问 - 刘庆龙 | Hekliu</title>
+<title>标签: java并发 - 刘庆龙 | Hekliu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
-    <meta name="description" content="HashMap的结构数组的寻址快，但是数据的插入与删除速度不行。链表的插入与删除速度快，但是寻址速度不行。 那有没有一种两者兼具的数据结构，答案肯定是有的，那就是hash表。 HashMap 就是根据 数组+链表 的方式组成了 hash 表：">
-<meta name="keywords" content="java基础">
-<meta property="og:type" content="article">
-<meta property="og:title" content="对于一些HashMap的一些疑问">
-<meta property="og:url" content="https://hekliu.github.io/2018/10/16/对于HashMap的一些疑问/index.html">
+    <meta name="description" content="一枚90后程序员，爱生活，爱编程">
+<meta property="og:type" content="website">
+<meta property="og:title" content="刘庆龙 | Hekliu">
+<meta property="og:url" content="https://hekliu.github.io/tags/java并发/index.html">
 <meta property="og:site_name" content="刘庆龙 | Hekliu">
-<meta property="og:description" content="HashMap的结构数组的寻址快，但是数据的插入与删除速度不行。链表的插入与删除速度快，但是寻址速度不行。 那有没有一种两者兼具的数据结构，答案肯定是有的，那就是hash表。 HashMap 就是根据 数组+链表 的方式组成了 hash 表：">
+<meta property="og:description" content="一枚90后程序员，爱生活，爱编程">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hekliu.github.io/images/side-imges/service-2.jpg">
-<meta property="og:updated_time" content="2019-09-30T09:29:00.240Z">
+<meta property="og:image" content="https://hekliu.github.io/images/og_image.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="对于一些HashMap的一些疑问">
-<meta name="twitter:description" content="HashMap的结构数组的寻址快，但是数据的插入与删除速度不行。链表的插入与删除速度快，但是寻址速度不行。 那有没有一种两者兼具的数据结构，答案肯定是有的，那就是hash表。 HashMap 就是根据 数组+链表 的方式组成了 hash 表：">
-<meta name="twitter:image" content="https://hekliu.github.io/images/side-imges/service-2.jpg">
+<meta name="twitter:title" content="刘庆龙 | Hekliu">
+<meta name="twitter:description" content="一枚90后程序员，爱生活，爱编程">
+<meta name="twitter:image" content="https://hekliu.github.io/images/og_image.png">
 
 
 
@@ -90,7 +88,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="对于一些HashMap的一些疑问" height="28">
+                <img src="/images/logo.png" alt="刘庆龙 | Hekliu" height="28">
             
 			
 			<span class="site-title">刘庆龙 | Hekliu</span>
@@ -136,18 +134,29 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">标签</a></li>
+            <li class="is-active"><a href="#" aria-current="page">java并发</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    <div class="card">
     
     <div class="card-image">
-        <span  class="image is-7by1">
-            <img class="thumbnail" src="/images/side-imges/service-2.jpg" alt="对于一些HashMap的一些疑问">
-        </span>
+        <a href="/2019/10/02/Java并发-一/" class="image is-7by1">
+            <img class="thumbnail" src="/images/side-imges/service-6.jpg" alt="Java并发(一)">
+        </a>
     </div>
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-16T08:46:03.000Z">2018-10-16</time>
+                <time class="level-item has-text-grey" datetime="2019-10-02T14:58:34.000Z">2019-10-02</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/java/">java</a>
@@ -157,7 +166,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    17 分钟 读完 (大约 2594 个字)
+                    20 分钟 读完 (大约 2949 个字)
                 </span>
                 
                 
@@ -166,121 +175,31 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                对于一些HashMap的一些疑问
+                <a class="has-link-black-ter" href="/2019/10/02/Java并发-一/">Java并发(一)</a>
             
         </h1>
         <div class="content">
-            <h2 id="HashMap的结构"><a href="#HashMap的结构" class="headerlink" title="HashMap的结构"></a>HashMap的结构</h2><p>数组的寻址快，但是数据的插入与删除速度不行。链表的插入与删除速度快，但是寻址速度不行。 那有没有一种两者兼具的数据结构，答案肯定是有的，那就是hash表。 <code>HashMap</code> 就是根据 <code>数组+链表</code> 的方式组成了 <code>hash</code> 表：</p>
-<a id="more"></a>
-<p><img src="/images/pic-1.png" alt="" title="1.png"></p>
-<h2 id="对于HashMap的一些疑问"><a href="#对于HashMap的一些疑问" class="headerlink" title="对于HashMap的一些疑问"></a>对于HashMap的一些疑问</h2><p><img src="/images/pic-2.png" alt="" title="2.png"></p>
-<h4 id="一、HashMap的resize过程是什么样的？"><a href="#一、HashMap的resize过程是什么样的？" class="headerlink" title="一、HashMap的resize过程是什么样的？"></a>一、HashMap的resize过程是什么样的？</h4><p>HashMap在put的时候会先检查当前数组的length,如果插入新的值的时候使得 length &gt; 0.75f * size<code>（f为加载因子，可以在创建hashMap时指定）</code>的话，会将数组进行扩容为当前容量的<code>2</code>倍。 扩容之后必定要将原有 hashMap 中的值拷贝到新容量的hashMap 里面，HashMap 默认的容量为<code>16</code>，加载因子为<code>0.75</code>， 也就是说当HashMap 中Entry的个数超过 <code>16 * 0.75 = 12</code>时, 会将容量扩充为 <code>16 * 2 = 32</code>，然后重新计算元素在数组中的位置，这是一个非常耗时的操作，所以我们在使用HashMap的时候如果能预先知道Map中元素的大小，预设其大小能够提升其性能。 resize代码：</p>
-<figure class="highlight haxe hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//HashMap数组扩容</span></span><br><span class="line"></span><br><span class="line">void resize(int <span class="hljs-keyword">new</span><span class="hljs-type">Capacity</span>) &#123;</span><br><span class="line"></span><br><span class="line">Entry[] oldTable = table;</span><br><span class="line"></span><br><span class="line">int oldCapacity = oldTable.length;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//如果当前的数组长度已经达到最大值，则不在进行调整</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> (oldCapacity == MAXIMUM_CAPACITY) &#123;</span><br><span class="line"></span><br><span class="line">threshold = Integer.MAX_VALUE;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">return</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//根据传入参数的长度定义新的数组</span></span><br><span class="line"></span><br><span class="line">Entry[] <span class="hljs-keyword">new</span><span class="hljs-type">Table</span> = <span class="hljs-keyword">new</span> <span class="hljs-type">Entry</span>[<span class="hljs-keyword">new</span><span class="hljs-type">Capacity</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//按照新的规则，将旧数组中的元素转移到新数组中</span></span><br><span class="line"></span><br><span class="line">transfer(<span class="hljs-keyword">new</span><span class="hljs-type">Table</span>);</span><br><span class="line"></span><br><span class="line">table = <span class="hljs-keyword">new</span><span class="hljs-type">Table</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//更新临界值</span></span><br><span class="line"></span><br><span class="line">threshold = (int)(<span class="hljs-keyword">new</span><span class="hljs-type">Capacity</span> * loadFactor);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//旧数组中元素往新数组中迁移</span></span><br><span class="line"></span><br><span class="line">void transfer(Entry[] <span class="hljs-keyword">new</span><span class="hljs-type">Table</span>) &#123;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//旧数组</span></span><br><span class="line"></span><br><span class="line">Entry[] src = table;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//新数组长度</span></span><br><span class="line"></span><br><span class="line">int <span class="hljs-keyword">new</span><span class="hljs-type">Capacity</span> = <span class="hljs-keyword">new</span><span class="hljs-type">Table</span>.length;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//遍历旧数组</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">for</span> (int j = <span class="hljs-number">0</span>; j &lt; src.length; j++) &#123;</span><br><span class="line"></span><br><span class="line">Entry e = src[j];</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> (e != <span class="hljs-literal">null</span>) &#123;</span><br><span class="line"></span><br><span class="line">src[j] = <span class="hljs-literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">do</span> &#123;</span><br><span class="line"></span><br><span class="line">Entry next = e.next;</span><br><span class="line"></span><br><span class="line">int i = indexFor(e.hash, <span class="hljs-keyword">new</span><span class="hljs-type">Capacity</span>);<span class="hljs-comment">//放在新数组中的index位置</span></span><br><span class="line"></span><br><span class="line">e.next = <span class="hljs-keyword">new</span><span class="hljs-type">Table</span>[i];<span class="hljs-comment">//实现链表结构，新加入的放在链头，之前的的数据放在链尾</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">new</span><span class="hljs-type">Table</span>[i] = e;</span><br><span class="line"></span><br><span class="line">e = next;</span><br><span class="line"></span><br><span class="line">&#125; <span class="hljs-keyword">while</span> (e != <span class="hljs-literal">null</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这是1.7中的代码，1.8中引入了红黑树的概念，代码会相对复杂一些。</p>
-<h4 id="二、HashMap在扩容的时候为什么容量都是原来的2倍，即容量为2-n"><a href="#二、HashMap在扩容的时候为什么容量都是原来的2倍，即容量为2-n" class="headerlink" title="二、HashMap在扩容的时候为什么容量都是原来的2倍，即容量为2^n"></a>二、HashMap在扩容的时候为什么容量都是原来的2倍，即容量为2^n</h4><p>HashMap 在计算数组中key的位置时，使用的算法为：<br><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* Returns index for hash code h. */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">indexFor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> h, <span class="hljs-keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">	<span class="hljs-comment">// assert Integer.bitCount(length) == 1 : "length must be a non-zero power of 2"; </span></span><br><span class="line">	<span class="hljs-keyword">return</span> h &amp; (length<span class="hljs-number">-1</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>即对key的hashcode 与当前数组容量 -1 进行与操作 我们假设有一个容量为分别为 15 和 16 的hashMap ，有两个key的hashcode 分别为 4 和 5 ，进行indexFor操作之后：</p>
-<figure class="highlight lsl hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H &amp; (length <span class="hljs-number">-1</span>) hash &amp; table.length<span class="hljs-number">-1</span> <span class="hljs-number">4</span> &amp; (<span class="hljs-number">15</span> - <span class="hljs-number">1</span>) <span class="hljs-number">0100</span> &amp; <span class="hljs-number">1110</span> = <span class="hljs-number">0100</span> <span class="hljs-number">5</span> &amp; （ <span class="hljs-number">15</span> <span class="hljs-number">-1</span> ） <span class="hljs-number">0101</span> &amp; <span class="hljs-number">1110</span> = <span class="hljs-number">01004</span> &amp; (<span class="hljs-number">16</span> - <span class="hljs-number">1</span>) <span class="hljs-number">0100</span> &amp; <span class="hljs-number">1111</span> = <span class="hljs-number">0100</span> <span class="hljs-number">5</span> &amp; （ <span class="hljs-number">16</span> <span class="hljs-number">-1</span> ） <span class="hljs-number">0101</span> &amp; <span class="hljs-number">1111</span> = <span class="hljs-number">0101</span></span><br></pre></td></tr></table></figure>
-<p>我们能够看到在容量为16时进行indexFor操作之后获得相同结果的几率要比容量为15时的几率要小，这样能够减少出现hash冲突的几率，从而提高查询效率。<code>2 ^ n</code>是一个非常神奇的数字。</p>
-<h4 id="三、put时出现相同的hashcode会怎样？"><a href="#三、put时出现相同的hashcode会怎样？" class="headerlink" title="三、put时出现相同的hashcode会怎样？"></a>三、put时出现相同的hashcode会怎样？</h4><p>hashMap 里面存储的Entry对象是由数组和链表组成的，当key的hashcode相同时，数组上这个位置存储的结构就是链表，这时会将新的值插入链表的表头。进行取值的时候会先获取到链表，再对链表进行遍历，通过key.equals方法获取到值。<code>（hashcode相同不代表对象相同，不要混淆hashcode和equals方法）</code>所以声明作final的对象，并且采用合适的equals()和hashCode()方法的话，将会减少碰撞的发生，提高效率。不可变性使得能够缓存不同键的hashcode，这将提高整个获取对象的速度，使用String，Interger这样的wrapper类作为键是非常好的选择。</p>
-<h4 id="四、什么是循环链表？"><a href="#四、什么是循环链表？" class="headerlink" title="四、什么是循环链表？"></a>四、什么是循环链表？</h4><p>HashMap在遇到多线程的操作中，如果需要重新调整HashMap的大小时，多个线程会同时尝试去调整HashMap的大小，这时处在同一位置的链表的元素的位置会反过来，以为移动到新的<code>bucket</code>的时候，HashMap不会将新的元素放到尾部<code>（为了避免尾部遍历）</code>，这时可能会出现<code>A -&gt; B -&gt; A</code>的情况，从而出现死循环，这便是HashMap中的循环链表。 所以HashMap 是不适合用在多线程的情况下的，可以考虑尝试使用<code>HashTable</code> 或是 <code>ConcurrentHashMap</code></p>
-<h4 id="五、如何正确使用HashMap提高性能"><a href="#五、如何正确使用HashMap提高性能" class="headerlink" title="五、如何正确使用HashMap提高性能"></a>五、如何正确使用HashMap提高性能</h4><p>在设置HashMap的时候指定其容量的大小，减少其resize的过程。</p>
-<h4 id="六、JDK1-8对HashMap进行了哪些优化"><a href="#六、JDK1-8对HashMap进行了哪些优化" class="headerlink" title="六、JDK1.8对HashMap进行了哪些优化"></a>六、JDK1.8对HashMap进行了哪些优化</h4><p>jdk1.8在对hash冲突的key时，如果此bucket位置上的元素数量在10以下时，还是和原来一样使用链表来进行存储，这时寻址的时间复杂度为O(n),当元素数量超过10时，使用红黑树进行代替，这时寻址的时间复杂度为O(n)</p>
-<h4 id="七、HashMap-与-HashTable、ConcurrentHashMap的区别"><a href="#七、HashMap-与-HashTable、ConcurrentHashMap的区别" class="headerlink" title="七、HashMap 与 HashTable、ConcurrentHashMap的区别"></a>七、HashMap 与 HashTable、ConcurrentHashMap的区别</h4><p>1.HashTable的方法是同步的，在方法的前面都有<code>synchronized</code>来同步，HashMap未经同步，所以在多线程场合要手动同步</p>
-<p>2.HashTable不允许null值<code>(key和value都不可以)</code> ,HashMap允许null值<code>(key和value都可以)</code>。</p>
-<p>3.HashTable有一个contains(Object value)功能和containsValue(Object value)功能一样。</p>
-<p>4.HashTable使用Enumeration进行遍历，HashMap使用Iterator进行遍历。</p>
-<p>5.HashTable中hash数组默认大小是11，增加的方式是 <code>old * 2 + 1</code>。HashMap中hash数组的默认大小是16，而且一定是2的指数。</p>
-<p>6.哈希值的使用不同，HashTable直接使用对象的hashCode，而HashMap重新计算hash值，用与代替求</p>
-<p>7.<code>ConcurrentHashMap</code>也是一种线程安全的集合类，他和HashTable也是有区别的，主要区别就是加锁的粒度以及如何加锁，<code>ConcurrentHashMap</code>的加锁粒度要比HashTable更细一点。将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。</p>
-<h4 id="八、ConcurrentHashMap-和-Hashtable-的区别"><a href="#八、ConcurrentHashMap-和-Hashtable-的区别" class="headerlink" title="八、ConcurrentHashMap 和 Hashtable 的区别"></a>八、ConcurrentHashMap 和 Hashtable 的区别</h4><p><code>ConcurrentHashMap</code> 和 <code>Hashtable</code> 的区别主要体现在实现线程安全的方式上不同。</p>
-<h5 id="底层数据结构："><a href="#底层数据结构：" class="headerlink" title="底层数据结构："></a>底层数据结构：</h5><p>JDK1.7的 ConcurrentHashMap 底层采用 分段的数组+链表 实现，JDK1.8 采用的数据结构跟HashMap1.8的结构一样，数组+链表/红黑二叉树。Hashtable 和 JDK1.8 之前的 HashMap 的底层数据结构类似都是采用 <code>数组+链表</code> 的形式，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的；</p>
-<h5 id="实现线程安全的方式（重要）："><a href="#实现线程安全的方式（重要）：" class="headerlink" title="实现线程安全的方式（重要）："></a>实现线程安全的方式（重要）：</h5><p>在JDK1.7的时候，<code>ConcurrentHashMap（分段锁）</code>对整个桶数组进行了分割分段(Segment)，每一把锁只锁容器其中一部分数据，多线程访问容器里不同数据段的数据，就不会存在锁竞争，提高并发访问率。<code>（默认分配16个Segment，比Hashtable效率提高16倍。）</code>到了 JDK1.8 的时候已经摒弃了Segment的概念，而是直接用 <code>Node数组+链表+红黑树</code>的数据结构来实现，并发控制使用 synchronized 和 CAS 来操作。<code>（JDK1.6以后 对 synchronized锁做了很多优化）</code>整个看起来就像是优化过且线程安全的 HashMap，虽然在JDK1.8中还能看到 Segment 的数据结构，但是已经简化了属性，只是为了兼容旧版本；</p>
-<p>Hashtable(同一把锁) :使用 synchronized 来保证线程安全，效率非常低下。当一个线程访问同步方法时，其他线程也访问同步方法，可能会进入阻塞或轮询状态，如使用 put 添加元素，另一个线程不能使用 put 添加元素，也不能使用 get，竞争会越来越激烈效率越低。</p>
-<h4 id="九、HashMap-多线程操作导致死循环问题"><a href="#九、HashMap-多线程操作导致死循环问题" class="headerlink" title="九、HashMap 多线程操作导致死循环问题"></a>九、HashMap 多线程操作导致死循环问题</h4><p>在多线程下，进行 put 操作会导致 HashMap 死循环，原因在于 HashMap 的扩容 resize()方法。由于扩容是新建一个数组，复制原数据到数组。由于数组下标挂有链表，所以需要复制链表，但是多线程操作有可能导致环形链表。复制链表过程如下:<br>以下模拟2个线程同时扩容。假设，当前 HashMap 的空间为2（临界值为1），hashcode 分别为 0 和 1，在散列地址 0 处有元素 A 和 B，这时候要添加元素 C，C 经过 hash 运算，得到散列地址为 1，这时候由于超过了临界值，空间不够，需要调用 resize 方法进行扩容，那么在多线程条件下，会出现条件竞争，模拟过程如下：</p>
-<p>线程一：读取到当前的 HashMap 情况，在准备扩容时，线程二介入</p>
-<p><img src="/images/pic-3.png" alt="" title="3.png"></p>
-<p>线程二：读取 HashMap，进行扩容</p>
-<p><img src="/images/pic-4.png" alt="" title="4.png"></p>
-<p>线程一：继续执行</p>
-<p><img src="/images/pic-5.png" alt="" title="5.png"></p>
-<p>这个过程为，先将 A 复制到新的 hash 表中，然后接着复制 B 到链头<code>（A 的前边：B.next=A）</code>，本来 <code>B.next=null</code>，到此也就结束了<code>（跟线程二一样的过程）</code>，但是，由于线程二扩容的原因，将 <code>B.next=A</code>，所以，这里继续复制A，让 <code>A.next=B</code>，由此，环形链表出现：<code>B.next=A</code>; <code>A.next=B</code></p>
-<h3 id="推荐阅读："><a href="#推荐阅读：" class="headerlink" title="推荐阅读："></a>推荐阅读：</h3><ul>
-<li><a href="https://blog.csdn.net/fjse51/article/details/55260493" target="_blank" rel="noopener">jdk1.8中ConcurrentHashMap的实现原理</a></li>
-<li><a href="https://crossoverjie.top/2018/07/23/java-senior/ConcurrentHashMap/" target="_blank" rel="noopener">HashMap? ConcurrentHashMap? 相信看完这篇没人能难住你！</a> </li>
-<li><a href="http://www.yuanrengu.com/index.php/2017-01-17.html" target="_blank" rel="noopener">HASHMAP、HASHTABLE、CONCURRENTHASHMAP的原理与区别</a></li>
-<li><a href="https://www.cnblogs.com/chengxiao/p/6842045.html" target="_blank" rel="noopener">ConcurrentHashMap实现原理及源码分析</a></li>
-<li><a href="https://blog.csdn.net/jianghuxiaojin/article/details/52006118#commentBox" target="_blank" rel="noopener">java-并发-ConcurrentHashMap高并发机制-jdk1.8</a></li>
-</ul>
-
+            <p>我们在找工作时，经常在招聘信息上看到有这么一条:有构建大型互联网服务及高并发等经验，你第一时间想到的是媒体常说的双十一吗？带着问题，我们一起思考技术….</p>
         </div>
         
-        <div class="level is-size-7 is-uppercase">
+        
+        <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/java基础/">java基础</a>
+                <a class="button is-size-7 is-light" href="/2019/10/02/Java并发-一/#more">阅读更多</a>
                 </div>
             </div>
         </div>
         
         
-        
     </div>
 </div>
 
 
 
-<div class="card">
-    <div class="card-content">
-        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
-        <div class="buttons is-centered">
-            
-                
-<a class="button is-info donate">
-    <span class="icon is-small">
-        <i class="fab fa-alipay"></i>
-    </span>
-    <span>支付宝</span>
-    <div class="qrcode"><img src="/images/donate/alipay.png" alt="支付宝"></div>
-</a>
-
-                
-                
-<a class="button is-success donate">
-    <span class="icon is-small">
-        <i class="fab fa-weixin"></i>
-    </span>
-    <span>微信</span>
-    <div class="qrcode"><img src="/images/donate/wechat.png" alt="微信"></div>
-</a>
-
-                
-        </div>
-    </div>
-</div>
 
 
 
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/09/30/tomcat出现的PermGen-Space问题/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">tomcat出现的PermGen Space问题</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2018/08/30/学习使用git/">
-                <span class="level-item">学习使用git</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
 
 
 </div>
@@ -946,7 +865,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="对于一些HashMap的一些疑问" height="28">
+                    <img src="/images/logo.png" alt="刘庆龙 | Hekliu" height="28">
                 
 				
 				<span class="site-title">刘庆龙 | Hekliu</span>
