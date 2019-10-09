@@ -2,23 +2,25 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>分类: java - 刘庆龙 | Hekliu</title>
+<title>Docker基本命令入门 - 刘庆龙 | Hekliu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
-    <meta name="description" content="一枚90后程序员，爱生活，爱编程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="刘庆龙 | Hekliu">
-<meta property="og:url" content="https://hekliu.github.io/categories/java/index.html">
+    <meta name="description" content="目前容器技术使用相当广泛不会或者没有使用过容器感觉都不像是个搞技术的所以，我也就docker相关内容做一个整理只有不断的学习，才能保持自己的竞争力">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker基本命令入门">
+<meta property="og:url" content="https://hekliu.github.io/2019/10/04/Docker基本命令入门/index.html">
 <meta property="og:site_name" content="刘庆龙 | Hekliu">
-<meta property="og:description" content="一枚90后程序员，爱生活，爱编程">
+<meta property="og:description" content="目前容器技术使用相当广泛不会或者没有使用过容器感觉都不像是个搞技术的所以，我也就docker相关内容做一个整理只有不断的学习，才能保持自己的竞争力">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hekliu.github.io/images/og_image.png">
+<meta property="og:image" content="https://hekliu.github.io/images/side-imges/service-8.png">
+<meta property="og:updated_time" content="2019-10-09T02:04:34.702Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘庆龙 | Hekliu">
-<meta name="twitter:description" content="一枚90后程序员，爱生活，爱编程">
-<meta name="twitter:image" content="https://hekliu.github.io/images/og_image.png">
+<meta name="twitter:title" content="Docker基本命令入门">
+<meta name="twitter:description" content="目前容器技术使用相当广泛不会或者没有使用过容器感觉都不像是个搞技术的所以，我也就docker相关内容做一个整理只有不断的学习，才能保持自己的竞争力">
+<meta name="twitter:image" content="https://hekliu.github.io/images/side-imges/service-8.png">
 
 
 
@@ -88,7 +90,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="刘庆龙 | Hekliu" height="28">
+                <img src="/images/logo.png" alt="Docker基本命令入门" height="28">
             
 			
 			<span class="site-title">刘庆龙 | Hekliu</span>
@@ -134,131 +136,126 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/images/side-imges/service-8.png" alt="Docker基本命令入门">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-04T15:24:29.000Z">2019-10-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 715 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Docker基本命令入门
+            
+        </h1>
+        <div class="content">
+            <p>目前容器技术使用相当广泛<br>不会或者没有使用过容器感觉都不像是个搞技术的<br>所以，我也就docker相关内容做一个整理<br>只有不断的学习，才能保持自己的竞争力<br><a id="more"></a></p>
+<h3 id="什么是容器？"><a href="#什么是容器？" class="headerlink" title="什么是容器？"></a>什么是容器？</h3><p>容器是一种轻量级、可移植、自包含的软件打包技术，使应用程序可以在几乎任何地方以相同的方式运行。</p>
+<h3 id="为什么使用容器？"><a href="#为什么使用容器？" class="headerlink" title="为什么使用容器？"></a>为什么使用容器？</h3><p>容器使软件具备了超强的可移植能力</p>
+<h3 id="怎样使用容器？"><a href="#怎样使用容器？" class="headerlink" title="怎样使用容器？"></a>怎样使用容器？</h3><p>容器常用的基本操作：<br><figure class="highlight mel hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">docker stop\start\restart [container_id\container_name]  <span class="hljs-comment">// 停止、启动、重启容器</span></span><br><span class="line">docker kill [container_id\container_name]                <span class="hljs-comment">// 强制停止</span></span><br><span class="line">docker <span class="hljs-keyword">pause</span>\unpause [container_id\container_name]       <span class="hljs-comment">// 暂停、取消暂停</span></span><br><span class="line">docker rm [container_id\container_name]     <span class="hljs-comment">// 删除容器</span></span><br><span class="line">docker rmi [image_id\image_name]            <span class="hljs-comment">// 删除镜像</span></span><br><span class="line"><span class="hljs-comment">// 按条件查找容器id, -a 所有 -q 只显示id -f filter过滤</span></span><br><span class="line">docker ps -aq -f status=running</span><br><span class="line">docker ps -aq -f status=exited</span><br><span class="line">docker ps -aq -f status=created</span><br><span class="line"><span class="hljs-comment">// 查看容器日志</span></span><br><span class="line">docker logs -f &lt;<span class="hljs-keyword">container</span>&gt;</span><br><span class="line"><span class="hljs-comment">// 进入shell</span></span><br><span class="line">docker <span class="hljs-keyword">exec</span> -it &lt;<span class="hljs-keyword">container</span>&gt; sh</span><br><span class="line"><span class="hljs-comment">// 进入bash</span></span><br><span class="line">docker <span class="hljs-keyword">exec</span> -it &lt;<span class="hljs-keyword">container</span>&gt; /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p>限制容器内存使用：<code>-m</code> 或 <code>–memory</code> 设置内存的使用限额、<code>–memory-swap</code> 设置内存<em>+swap</em>的使用限额<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-builtin-name">run</span> -m 200M <span class="hljs-attribute">--memory-swap</span>=300M ubuntu</span><br></pre></td></tr></table></figure></p>
+<p>限制容器CPU使用：<code>-c</code> 或 <code>–cpu-shares</code> 设置权重、 <code>–cpu</code> 设置工作线程数量<br><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> -c <span class="hljs-number">1024</span> progrium/stress <span class="hljs-comment">--cpu 1</span></span><br></pre></td></tr></table></figure></p>
+<p>限制容器IO的使用：<code>–blkio-weight</code> 设置<em>block IO</em>的优先级<br><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> <span class="hljs-comment">--name my_ubuntu --blkio-weight 600 ubuntu</span></span><br></pre></td></tr></table></figure></p>
+<p>创建自定义IP网段的容器网络：</p>
+<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker<span class="hljs-built_in"> network </span>create --driver<span class="hljs-built_in"> bridge </span>--subnet 172.22.22.0/24 --gateway 172.22.22.1 my_net</span><br></pre></td></tr></table></figure>
+<p>启动时给容器指定一个静态ip：只有使用 –subnet 创建的网络才能指定静态ip<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-builtin-name">run</span> -it <span class="hljs-attribute">--network</span>=my_net --ip 172.22.22.22 busybox</span><br></pre></td></tr></table></figure></p>
+<p>查看容器网络：<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker<span class="hljs-built_in"> network </span>ls</span><br></pre></td></tr></table></figure></p>
+<p>共享网络栈：使用 <code>–network=container:web1</code> 指定 <code>jointed</code> 容器为 <code>web1</code></p>
+<p>将主机上的目录或者文件挂载到容器：使用 <code>-v</code> : 将其 <code>mount</code> 到容器<br><figure class="highlight dockerfile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-keyword">run</span><span class="hljs-bash"> -d -p 80:80 -v ~/htdocs:/usr/<span class="hljs-built_in">local</span>/apache2/htdocs httpd</span></span><br><span class="line"><span class="hljs-bash">docker run -d -p 80:80 -v ~/htdocs:/usr/<span class="hljs-built_in">local</span>/apache2/htdocs:ro httpd  // ro设置只读权限，容器不能对该文件做修改</span></span><br></pre></td></tr></table></figure></p>
+<p>使用<em>volume container</em>共享容器数据：通过 <code>–volumes-from</code> 使用 <code>vc_data</code> 这个<em>volume container</em><br><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.创建一个vc：</span><br><span class="line">docker create <span class="hljs-params">--name</span> vc_data -v ~<span class="hljs-string">/htdocs</span>:<span class="hljs-string">/usr/local/apache2/htdocs</span> -v <span class="hljs-string">/other/useful/tools</span> busybox</span><br><span class="line">2.共享vc：</span><br><span class="line">docker run <span class="hljs-params">--name</span> web1 -d -p 80 <span class="hljs-params">--volumes-from</span> vc_data httpd</span><br><span class="line">docker run <span class="hljs-params">--name</span> web2 -d -p 80 <span class="hljs-params">--volumes-from</span> vc_data httpd</span><br></pre></td></tr></table></figure></p>
+<p>docker删除bind mount：只能由host负责删除<br>docker删除docker managed volume：删除容器时加上 -v 可以删除容器依赖的volume<br>如果删除容易时，没有加-v删除依赖volume，也可以用：<code>docker volume rm &lt;volume_id&gt;</code></p>
+<p>如何安装？<br>详情见<a href="https://docs.docker.com/install/linux/docker-ce/centos/" target="_blank" rel="noopener">官方安装文档</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/docker/">docker</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
             
-            <li class="is-active"><a href="#" aria-current="page">java</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/donate/alipay.png" alt="支付宝"></div>
+</a>
 
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/10/02/Java并发-一/" class="image is-7by1">
-            <img class="thumbnail" src="/images/side-imges/service-6.jpg" alt="Java并发(一)">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-02T14:58:34.000Z">2019-10-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/java/">java</a>
-                </div>
                 
                 
-                <span class="level-item has-text-grey">
-                    
-                    
-                    20 分钟 读完 (大约 2949 个字)
-                </span>
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/donate/wechat.png" alt="微信"></div>
+</a>
+
                 
-                
-            </div>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/10/02/Java并发-一/">Java并发(一)</a>
-            
-        </h1>
-        <div class="content">
-            <p>我们在找工作时，经常在招聘信息上看到有这么一条:有构建大型互联网服务及高并发等经验，你第一时间想到的是媒体常说的双十一吗？带着问题，我们一起思考技术….</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/10/02/Java并发-一/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/10/16/对于HashMap的一些疑问/" class="image is-7by1">
-            <img class="thumbnail" src="/images/side-imges/service-2.jpg" alt="对于一些HashMap的一些疑问">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-16T08:46:03.000Z">2018-10-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/java/">java</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    17 分钟 读完 (大约 2594 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/10/16/对于HashMap的一些疑问/">对于一些HashMap的一些疑问</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="HashMap的结构"><a href="#HashMap的结构" class="headerlink" title="HashMap的结构"></a>HashMap的结构</h2><p>数组的寻址快，但是数据的插入与删除速度不行。链表的插入与删除速度快，但是寻址速度不行。 那有没有一种两者兼具的数据结构，答案肯定是有的，那就是hash表。 <code>HashMap</code> 就是根据 <code>数组+链表</code> 的方式组成了 <code>hash</code> 表：</p>
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/05/Dockerfile极简入门与实践/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Dockerfile极简入门与实践</span>
+            </a>
         </div>
         
         
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/10/16/对于HashMap的一些疑问/#more">阅读更多</a>
-                </div>
-            </div>
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/03/java中的I-O演进之路/">
+                <span class="level-item">java中的I/O演进之路</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
 
 
 </div>
@@ -946,7 +943,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="刘庆龙 | Hekliu" height="28">
+                    <img src="/images/logo.png" alt="Docker基本命令入门" height="28">
                 
 				
 				<span class="site-title">刘庆龙 | Hekliu</span>

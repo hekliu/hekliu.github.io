@@ -2,23 +2,25 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>分类: java - 刘庆龙 | Hekliu</title>
+<title>Dockerfile极简入门与实践 - 刘庆龙 | Hekliu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
-    <meta name="description" content="一枚90后程序员，爱生活，爱编程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="刘庆龙 | Hekliu">
-<meta property="og:url" content="https://hekliu.github.io/categories/java/index.html">
+    <meta name="description" content="前文中，罗列了docker使用中用到的基本命令此文，将会对怎样使用Dockerfile去创建一个镜像做简单的介绍">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dockerfile极简入门与实践">
+<meta property="og:url" content="https://hekliu.github.io/2019/10/05/Dockerfile极简入门与实践/index.html">
 <meta property="og:site_name" content="刘庆龙 | Hekliu">
-<meta property="og:description" content="一枚90后程序员，爱生活，爱编程">
+<meta property="og:description" content="前文中，罗列了docker使用中用到的基本命令此文，将会对怎样使用Dockerfile去创建一个镜像做简单的介绍">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hekliu.github.io/images/og_image.png">
+<meta property="og:image" content="https://hekliu.github.io/images/side-imges/service-9.png">
+<meta property="og:updated_time" content="2019-10-09T01:52:28.725Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘庆龙 | Hekliu">
-<meta name="twitter:description" content="一枚90后程序员，爱生活，爱编程">
-<meta name="twitter:image" content="https://hekliu.github.io/images/og_image.png">
+<meta name="twitter:title" content="Dockerfile极简入门与实践">
+<meta name="twitter:description" content="前文中，罗列了docker使用中用到的基本命令此文，将会对怎样使用Dockerfile去创建一个镜像做简单的介绍">
+<meta name="twitter:image" content="https://hekliu.github.io/images/side-imges/service-9.png">
 
 
 
@@ -88,7 +90,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="刘庆龙 | Hekliu" height="28">
+                <img src="/images/logo.png" alt="Dockerfile极简入门与实践" height="28">
             
 			
 			<span class="site-title">刘庆龙 | Hekliu</span>
@@ -134,131 +136,136 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/images/side-imges/service-9.png" alt="Dockerfile极简入门与实践">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-05T12:30:59.000Z">2019-10-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 分钟 读完 (大约 1608 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Dockerfile极简入门与实践
+            
+        </h1>
+        <div class="content">
+            <p>前文中，罗列了docker使用中用到的基本命令<br>此文，将会对怎样使用Dockerfile去创建一个镜像做简单的介绍<br><a id="more"></a></p>
+<h3 id="Dockerfile命令"><a href="#Dockerfile命令" class="headerlink" title="Dockerfile命令"></a>Dockerfile命令</h3><p>要开始编写Dockerfile，首先要对相关的命令有个清晰的认识<br>下面列出了部分Dockerfile命令的功能以及使用方法，供参考：</p>
+<p><strong>1. FROM</strong><br>Dockerfile的第一条指定必须是FROM，用于指定基础镜像。<br>用法：<br><code>FROM [image]:[tag]</code></p>
+<p><strong>2. MAINTAINER</strong><br>用于指定此Dockerfile维护者信息。<br>用法：<br><code>MAINTAINER &lt;name&gt; &lt;email&gt;</code></p>
+<p><strong>3. ADD</strong><br>复制指定内容到镜像中，指定内容可以是一个相对或绝对路径，也可以是一个url(此时相当于wget)，如果添加的文件是个tar压缩文件，文件在复制的时候会自动解压。<br>用法：<br><code>ADD &lt;src&gt; &lt;dest&gt;</code></p>
+<p><strong>4. COPY</strong><br>与ADD命令用法相同，区别是COPY只能复制本地文件<br>用法：<br><code>COPY &lt;src&gt; &lt;dest&gt;</code></p>
+<p><strong>5. RUN</strong><br>构建镜像时运行指定命令，建议多个命令尽量写在同一个RUN中，用&amp;&amp;分割或使用\换行。<br>用法：<br><code>RUN &lt;command&gt;</code><br><code>RUN [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]</code><br>前者在shell终端上运行，后者使用exec运行。</p>
+<p><strong>6. CMD</strong><br>容器启动时运行指定命令，每个容器只能执行一条CMD命令，多个CMD命令时，只最后一条被执行。<br>用法：<br><code>CMD [&quot;executable&quot;,&quot;param1&quot;,&quot;param2&quot;]</code><br><code>CMD [&quot;param1&quot;,&quot;param2&quot;]</code><br><code>CMD &lt;command&gt; &lt;param1&gt; &lt;param2&gt;</code></p>
+<p><strong>7. ENV</strong><br>指定一个环境变量，可以被RUN,WORKDIR命令使用，并在容器运行时保持。<br>用法:<br><code>ENV &lt;key&gt; &lt;value&gt;</code><br><code>ENV &lt;key1&gt;=&lt;value1&gt; &lt;k2&gt;=&lt;v2&gt; &lt;k3&gt;=&lt;v3&gt; ...</code></p>
+<p><strong>8. ENTRYPOINT</strong><br>配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖，每个Dockerfile中只能有一个 ENTRYPOINT ，当指定多个时，只有最后一个起效。<br>用法：<br><code>ENTRYPOINT [“executable”, “param1”, “param2”]</code><br><code>ENTRYPOINT &lt;command&gt; &lt;param1&gt; &lt;param2&gt;</code></p>
+<p><strong>9. WORKDIR</strong><br>设置工作目录，对RUN,CMD,ENTRYPOINT,COPY,ADD生效。如果不存在则会创建。<br>用法：<br><code>WORKDIR &lt;path&gt;</code></p>
+<p><strong>10. EXPOSE</strong><br>功能为暴漏容器运行时的监听端口给外部<br>用法：<br><code>EXPOSE &lt;port&gt;</code></p>
+<h3 id="Dockerfile实践"><a href="#Dockerfile实践" class="headerlink" title="Dockerfile实践"></a>Dockerfile实践</h3><p>通读过上面的Dockerfile命令，相信对编写一个Dockerfile有了一个初步的认识<br>接着，我们来通过一个具体的需求，来看一个完整的镜像是怎么通过Dockerfile生成的</p>
+<p><strong>1. 需求</strong><br>使用32位的jre环境运行一个dubbo服务的jar包</p>
+<p><strong>2. 编写Dockerfile</strong><br>首先，我们需要一个32位的jre环境，你可以从镜像仓库找一个，但此处，我们选择通过Dockerfile自己创建</p>
+<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 指定基础镜像</span></span><br><span class="line"><span class="hljs-keyword">FROM</span> i386/centos:6</span><br><span class="line"><span class="hljs-comment"># 作者信息</span></span><br><span class="line">MAINTAINER trainoo <span class="hljs-string">"trainoo@163.com"</span></span><br><span class="line"><span class="hljs-comment"># 添加jre环境，add会自动解压</span></span><br><span class="line"><span class="hljs-builtin-name">ADD</span> jre-8u211-linux-i586.tar.gz /opt/docker/java/jre8</span><br><span class="line"><span class="hljs-comment"># 设置java环境变量</span></span><br><span class="line">ENV <span class="hljs-attribute">JAVA_HOME</span>=/opt/docker/java/jre8/jre1.8.0_211 \</span><br><span class="line">	<span class="hljs-attribute">CLASSPATH</span>=<span class="hljs-variable">$JAVA_HOME</span>/bin \</span><br><span class="line">	<span class="hljs-attribute">PATH</span>=.:$JAVA_HOME/bin:$PATH</span><br><span class="line"><span class="hljs-comment"># 容器启动后执行，显示java版本号，可以查看环境是否安装成功</span></span><br><span class="line">CMD [<span class="hljs-string">"java"</span>,<span class="hljs-string">"-version"</span>]</span><br></pre></td></tr></table></figure>
+<p>问：为什么使用 i386/centos:6 作为基础镜像？</p>
+<p>答：因为32位的jre当然是使用32位的环境运行比较方便</p>
+<p>如果使用64位的环境运行32位jre也是可以的，但是需要安装如下依赖：</p>
+<p><code>RUN yum update &amp;&amp; yum -y install glibc.i686 zlib.i686 libstdc++.i686</code></p>
+<p>如果打包的是64位的jre，那么基础镜像可以换成：<code>frolvlad/alpine-glibc</code></p>
+<p>问：<code>jre-8u211-linux-i586.tar.gz</code> 这个包从哪下载？</p>
+<p>答：你可以从官网下载，当然，你看到此文章时，可能网址已经变化。</p>
+<p><strong>3. 构建</strong><br>如上，我们写好了一个Dockerfile，只需把jre包跟Dockerfile放在同一路径<br>即可开始构建，命令如下：docker build -t jre8-64:second .<br>ps: 此处应该贴32位的运行过程的，但是64位的跟32位没太大区别，所以就这样吧</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@xxx jre8-x32]<span class="hljs-comment"># ll</span></span><br><span class="line">total 89060</span><br><span class="line">-rw-r--r--. 1 root root      369 Jun 27 18:38 Dockerfile</span><br><span class="line">-rw-r--r--. 1 root root 91192891 Jun 26 14:52 jre-8u211-linux-i586.tar.gz</span><br><span class="line"></span><br><span class="line">[root@xxx jre8-x64]<span class="hljs-comment"># docker build -t jre8-64:second .</span></span><br><span class="line">Sending build context to Docker daemon  87.86MB</span><br><span class="line">Step 1/5 : FROM frolvlad/alpine-glibc:alpine-3.10</span><br><span class="line"> ---&gt; 74b43ef19206</span><br><span class="line">Step 2/5 : MAINTAINER trainoo <span class="hljs-string">"trainoo@163.com"</span></span><br><span class="line"> ---&gt; Using cache</span><br><span class="line"> ---&gt; 1257f5f17f2a</span><br><span class="line">Step 3/5 : ADD jre-8u211-linux-x64.tar.gz /opt/docker/java/jre8</span><br><span class="line"> ---&gt; Using cache</span><br><span class="line"> ---&gt; 10692b79be49</span><br><span class="line">Step 4/5 : ENV JAVA_HOME=/opt/docker/java/jre8/jre1.8.0_211 CLASSPATH=<span class="hljs-variable">$JAVA_HOME</span>/bin PATH=.:<span class="hljs-variable">$JAVA_HOME</span>/bin:<span class="hljs-variable">$PATH</span></span><br><span class="line"> ---&gt; Running <span class="hljs-keyword">in</span> 1710cc8fd3aa</span><br><span class="line">Removing intermediate container 1710cc8fd3aa</span><br><span class="line"> ---&gt; 5dd2f0ae922c</span><br><span class="line">Step 5/5 : CMD [<span class="hljs-string">"java"</span>,<span class="hljs-string">"-version"</span>]</span><br><span class="line"> ---&gt; Running <span class="hljs-keyword">in</span> 368238c0940b</span><br><span class="line">Removing intermediate container 368238c0940b</span><br><span class="line"> ---&gt; e6e9cf729e37</span><br><span class="line">Successfully built e6e9cf729e37</span><br><span class="line">Successfully tagged jre8-64:second</span><br><span class="line"></span><br><span class="line">[root@xxx jre8-x64]<span class="hljs-comment"># docker images -f reference=jre8*</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">jre8-64             second              e6e9cf729e37        53 seconds ago      251MB</span><br><span class="line">jre8-32             base                9035f0dcd0ed        20 hours ago        433MB</span><br><span class="line">jre8-64             base                ce0823b7fdc3        47 hours ago        251MB</span><br></pre></td></tr></table></figure>
+<p>由上面的构建步骤可以看出，每运行一个命令，都会产生一个临时镜像，所以为了避免产生多余的临时镜像，我们要尽量的把多个相同指令的的构建步骤，写在同一行里。</p>
+<p><strong>4. 运行项目</strong><br>假设我们把项目打包好了，打包好的jar包为：my-service-1.0.jar。</p>
+<figure class="highlight dockerfile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">FROM</span> jre8-<span class="hljs-number">32</span>:base</span><br><span class="line"><span class="hljs-keyword">MAINTAINER</span> trainoo <span class="hljs-string">"trainoo@163.com"</span></span><br><span class="line"><span class="hljs-keyword">COPY</span><span class="hljs-bash"> ./jar/ /opt/dubbo-server/</span></span><br><span class="line"><span class="hljs-bash">RUN <span class="hljs-built_in">cd</span> /opt/dubbo-server/ &amp;&amp; mv $(ls | grep jar) app.jar</span></span><br><span class="line"><span class="hljs-bash">WORKDIR /opt/dubbo-server/</span></span><br><span class="line"><span class="hljs-bash">CMD [<span class="hljs-string">"java"</span>,<span class="hljs-string">"-Xms512M"</span>,<span class="hljs-string">"-Xmx512M"</span>,<span class="hljs-string">"-jar"</span>,<span class="hljs-string">"app.jar"</span>]</span></span><br><span class="line"><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-bash">// 为了通用性，这里把jar文件(如果不是springboot项目，还有lib等依赖包)放在jar目录下，COPY时一起复制过去</span></span><br><span class="line"><span class="hljs-bash">// 同样目的，使用 mv $(ls | grep jar) app.jar 将需要被执行的jar文件统一命名成 app.jar</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 构建镜像</span><br><span class="line">[root@xxx jre8-x64]# docker build -t myservice:v1 .</span><br><span class="line">.....此处省略部分.....</span><br><span class="line"># 启动容器</span><br><span class="line">[root@xxx jre8-x64]# docker run -d --name myservice myservice:v1</span><br><span class="line"># 查看容器</span><br><span class="line">[root@xxx jre8-x64]# docker ps</span><br></pre></td></tr></table></figure>
+<h3 id="后续总结"><a href="#后续总结" class="headerlink" title="后续总结"></a>后续总结</h3><p>事情总是不会这么顺利，中途总是会有一些小插曲，所以下面是可能遇到的问题的解决方案</p>
+<h4 id="docker-批量删除产生的缓存镜像"><a href="#docker-批量删除产生的缓存镜像" class="headerlink" title="docker 批量删除产生的缓存镜像"></a>docker 批量删除产生的缓存镜像</h4><figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 第一种风格</span><br><span class="line">docker <span class="hljs-keyword">ps</span> -<span class="hljs-keyword">a</span> | <span class="hljs-keyword">grep</span> <span class="hljs-string">"Exited"</span> | awk <span class="hljs-string">'&#123;print $1 &#125;'</span>|xargs docker <span class="hljs-keyword">stop</span></span><br><span class="line">docker <span class="hljs-keyword">ps</span> -<span class="hljs-keyword">a</span> | <span class="hljs-keyword">grep</span> <span class="hljs-string">"Exited"</span> | awk <span class="hljs-string">'&#123;print $1 &#125;'</span>|xargs docker rm</span><br><span class="line">docker images | <span class="hljs-keyword">grep</span> none | awk <span class="hljs-string">'&#123;print $3&#125;'</span> | xargs docker rmi</span><br><span class="line"></span><br><span class="line"># 第二种风格</span><br><span class="line">docker rm  $(docker <span class="hljs-keyword">ps</span> -aq -<span class="hljs-keyword">f</span> exited=<span class="hljs-number">137</span>)</span><br><span class="line">docker rm  $(docker <span class="hljs-keyword">ps</span> -aq -<span class="hljs-keyword">f</span> status=exited)</span><br><span class="line">docker rmi $(docker images -<span class="hljs-keyword">qa</span> -<span class="hljs-keyword">f</span> reference=*:v1)</span><br></pre></td></tr></table></figure>
+<h4 id="container-时区跟-host-不一致"><a href="#container-时区跟-host-不一致" class="headerlink" title="container 时区跟 host 不一致"></a>container 时区跟 host 不一致</h4><figure class="highlight dockerfile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Dockerfile中添加</span></span><br><span class="line"><span class="hljs-keyword">RUN</span><span class="hljs-bash"> <span class="hljs-built_in">echo</span> <span class="hljs-string">"Asia/Shanghai"</span> &gt; /etc/timezone</span></span><br><span class="line"><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-bash"><span class="hljs-comment"># 启动时添加：-v /etc/localtime:/etc/localtime:ro</span></span></span><br><span class="line"><span class="hljs-bash">docker run -d -v /etc/localtime:/etc/localtime:ro --net mynet --name myservice myservice:v1</span></span><br></pre></td></tr></table></figure>
+<h4 id="docker运行项目，日志中文显示"><a href="#docker运行项目，日志中文显示" class="headerlink" title="docker运行项目，日志中文显示???"></a>docker运行项目，日志中文显示???</h4><figure class="highlight dockerfile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Dockerfile中添加，指定语言环境</span></span><br><span class="line"><span class="hljs-keyword">RUN</span><span class="hljs-bash"> localedef -i en_US -f UTF-8 en_US.UTF-8</span></span><br><span class="line"><span class="hljs-bash">ENV LANG en_US.UTF-8  </span></span><br><span class="line"><span class="hljs-bash">ENV LANGUAGE en_US:en  </span></span><br><span class="line"><span class="hljs-bash">ENV LC_ALL en_US.UTF-8</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/docker/">docker</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
             
-            <li class="is-active"><a href="#" aria-current="page">java</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/donate/alipay.png" alt="支付宝"></div>
+</a>
 
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/10/02/Java并发-一/" class="image is-7by1">
-            <img class="thumbnail" src="/images/side-imges/service-6.jpg" alt="Java并发(一)">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-02T14:58:34.000Z">2019-10-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/java/">java</a>
-                </div>
                 
                 
-                <span class="level-item has-text-grey">
-                    
-                    
-                    20 分钟 读完 (大约 2949 个字)
-                </span>
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/donate/wechat.png" alt="微信"></div>
+</a>
+
                 
-                
-            </div>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/10/02/Java并发-一/">Java并发(一)</a>
-            
-        </h1>
-        <div class="content">
-            <p>我们在找工作时，经常在招聘信息上看到有这么一条:有构建大型互联网服务及高并发等经验，你第一时间想到的是媒体常说的双十一吗？带着问题，我们一起思考技术….</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/10/02/Java并发-一/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/10/16/对于HashMap的一些疑问/" class="image is-7by1">
-            <img class="thumbnail" src="/images/side-imges/service-2.jpg" alt="对于一些HashMap的一些疑问">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-16T08:46:03.000Z">2018-10-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/java/">java</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    17 分钟 读完 (大约 2594 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/04/Docker基本命令入门/">
+                <span class="level-item">Docker基本命令入门</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/10/16/对于HashMap的一些疑问/">对于一些HashMap的一些疑问</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="HashMap的结构"><a href="#HashMap的结构" class="headerlink" title="HashMap的结构"></a>HashMap的结构</h2><p>数组的寻址快，但是数据的插入与删除速度不行。链表的插入与删除速度快，但是寻址速度不行。 那有没有一种两者兼具的数据结构，答案肯定是有的，那就是hash表。 <code>HashMap</code> 就是根据 <code>数组+链表</code> 的方式组成了 <code>hash</code> 表：</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/10/16/对于HashMap的一些疑问/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
 
 
 </div>
@@ -946,7 +953,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="刘庆龙 | Hekliu" height="28">
+                    <img src="/images/logo.png" alt="Dockerfile极简入门与实践" height="28">
                 
 				
 				<span class="site-title">刘庆龙 | Hekliu</span>
