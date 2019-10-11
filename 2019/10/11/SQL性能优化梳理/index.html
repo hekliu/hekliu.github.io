@@ -2,23 +2,25 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>归档: 2019 - 刘庆龙 | Hekliu</title>
+<title>SQL性能优化梳理 - 刘庆龙 | Hekliu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
-    <meta name="description" content="一枚90后程序员，爱生活，爱编程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="刘庆龙 | Hekliu">
-<meta property="og:url" content="https://hekliu.github.io/archives/2019/index.html">
+    <meta name="description" content="本文主要针对的是关系型数据数据库MySql。 先简单梳理下Mysql的基本概念，然后分创建时和查询时这两个阶段的优化展开。">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL性能优化梳理">
+<meta property="og:url" content="https://hekliu.github.io/2019/10/11/SQL性能优化梳理/index.html">
 <meta property="og:site_name" content="刘庆龙 | Hekliu">
-<meta property="og:description" content="一枚90后程序员，爱生活，爱编程">
+<meta property="og:description" content="本文主要针对的是关系型数据数据库MySql。 先简单梳理下Mysql的基本概念，然后分创建时和查询时这两个阶段的优化展开。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hekliu.github.io/images/og_image.png">
+<meta property="og:image" content="https://hekliu.github.io/images/side-imges/service-10.jpg">
+<meta property="og:updated_time" content="2019-10-11T02:23:45.782Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘庆龙 | Hekliu">
-<meta name="twitter:description" content="一枚90后程序员，爱生活，爱编程">
-<meta name="twitter:image" content="https://hekliu.github.io/images/og_image.png">
+<meta name="twitter:title" content="SQL性能优化梳理">
+<meta name="twitter:description" content="本文主要针对的是关系型数据数据库MySql。 先简单梳理下Mysql的基本概念，然后分创建时和查询时这两个阶段的优化展开。">
+<meta name="twitter:image" content="https://hekliu.github.io/images/side-imges/service-10.jpg">
 
 
 
@@ -88,7 +90,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="刘庆龙 | Hekliu" height="28">
+                <img src="/images/logo.png" alt="SQL性能优化梳理" height="28">
             
 			
 			<span class="site-title">刘庆龙 | Hekliu</span>
@@ -133,191 +135,212 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/images/side-imges/service-10.jpg" alt="SQL性能优化梳理">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-11T01:18:56.000Z">2019-10-11</time>
                 
-                <a href="/2019/10/11/SQL性能优化梳理/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/images/side-imges/service-10.jpg" alt="SQL性能优化梳理">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-11T01:18:56.000Z">2019-10-11</time>
-                        <a href="/2019/10/11/SQL性能优化梳理/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SQL性能优化梳理</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/mysql/">mysql</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/mysql/">mysql</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <a href="/2019/10/05/Dockerfile极简入门与实践/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/images/side-imges/service-9.png" alt="Dockerfile极简入门与实践">
-                    </p>
-                </a>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-05T12:30:59.000Z">2019-10-05</time>
-                        <a href="/2019/10/05/Dockerfile极简入门与实践/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Dockerfile极简入门与实践</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+                <span class="level-item has-text-grey">
+                    
+                    
+                    19 分钟 读完 (大约 2897 个字)
+                </span>
                 
-                <a href="/2019/10/04/Docker基本命令入门/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/images/side-imges/service-8.png" alt="Docker基本命令入门">
-                    </p>
-                </a>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-04T15:24:29.000Z">2019-10-04</time>
-                        <a href="/2019/10/04/Docker基本命令入门/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Docker基本命令入门</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <a href="/2019/10/03/java中的I-O演进之路/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/images/side-imges/service-5.jpg" alt="java中的I/O演进之路">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-03T15:15:49.000Z">2019-10-03</time>
-                        <a href="/2019/10/03/java中的I-O演进之路/" class="title has-link-black-ter is-size-6 has-text-weight-normal">java中的I/O演进之路</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/netty/">netty</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <a href="/2019/10/02/Java并发-一/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/images/side-imges/service-6.jpg" alt="Java并发(一)">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-02T14:58:34.000Z">2019-10-02</time>
-                        <a href="/2019/10/02/Java并发-一/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java并发(一)</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/java/">java</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <a href="/2019/09/30/配置docker官方源并用yum安装docker/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/images/side-imges/service-4.jpg" alt="配置docker官方源并用yum安装docker">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-09-30T08:12:07.000Z">2019-09-30</time>
-                        <a href="/2019/09/30/配置docker官方源并用yum安装docker/" class="title has-link-black-ter is-size-6 has-text-weight-normal">配置docker官方源并用yum安装docker</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <a href="/2019/09/30/tomcat出现的PermGen-Space问题/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/images/side-imges/service-3.jpg" alt="tomcat出现的PermGen Space问题">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-09-30T06:04:27.000Z">2019-09-30</time>
-                        <a href="/2019/09/30/tomcat出现的PermGen-Space问题/" class="title has-link-black-ter is-size-6 has-text-weight-normal">tomcat出现的PermGen Space问题</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/tomcat/">tomcat</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                SQL性能优化梳理
+            
+        </h1>
+        <div class="content">
+            <p>本文主要针对的是关系型数据数据库MySql。</p>
+<p>先简单梳理下Mysql的基本概念，然后分创建时和查询时这两个阶段的优化展开。<br><a id="more"></a></p>
+<h2 id="1-基本概念简述"><a href="#1-基本概念简述" class="headerlink" title="1 基本概念简述"></a>1 基本概念简述</h2><h3 id="1-1-逻辑架构"><a href="#1-1-逻辑架构" class="headerlink" title="1.1 逻辑架构"></a>1.1 逻辑架构</h3><p><img src="/images/SQL性能优化梳理/pic-1.jpg" alt="架构图" title="架构图.jpg"></p>
+<p><strong>第一层</strong>：客户端通过连接服务，将要执行的sql指令传输过来<br><strong>第二层</strong>：服务器解析并优化sql，生成最终的执行计划并执行<br><strong>第三层</strong>：存储引擎，负责数据的储存和提取</p>
+<h3 id="1-2-锁"><a href="#1-2-锁" class="headerlink" title="1.2 锁"></a>1.2 锁</h3><p>数据库通过锁机制来解决并发场景-共享锁（读锁）和排他锁（写锁）。读锁是不阻塞的，多个客户端可以在同一时刻读取同一个资源。写锁是排他的，并且会阻塞其他的读锁和写锁。简单提下乐观锁和悲观锁。</p>
+<p><code>乐观锁</code>，通常用于数据竞争不激烈的场景，多读少写，通过版本号和时间戳实现。<br><code>悲观锁</code>，通常用于数据竞争激烈的场景，每次操作都会锁定数据。</p>
+<p>要锁定数据需要一定的锁策略来配合。</p>
+<p><code>表锁</code>，锁定整张表，开销最小，但是会加剧锁竞争。<br><code>行锁</code>，锁定行级别，开销最大，但是可以最大程度的支持并发。</p>
+<p>但是MySql的存储引擎的真实实现不是简单的行级锁，一般都是实现了多版本并发控制（MVCC）。MVCC是行级锁的变种，多数情况下避免了加锁操作，开销更低。MVCC是通过保存数据的某个时间点快照实现的。</p>
+<h3 id="1-3-事务"><a href="#1-3-事务" class="headerlink" title="1.3 事务"></a>1.3 事务</h3><p>事务保证一组原子性的操作，要么全部成功，要么全部失败。一旦失败，回滚之前的所有操作。MySql采用自动提交，如果不是显式的开启一个事务，则每个查询都作为一个事务。</p>
+<p>隔离级别控制了一个事务中的修改，哪些在事务内和事务间是可见的。<strong>四种常见的隔离级别</strong>：</p>
+<p><code>未提交读</code>（Read UnCommitted），事务中的修改，即使没提交对其他事务也是可见的。事务可能读取未提交的数据，造成脏读。<br>提交读（Read Committed），一个事务开始时，只能看见已提交的事务所做的修改。事务未提交之前，所做的修改对其他事务是不可见的。也叫不可重复读，同一个事务多次读取同样记录可能不同。<br><code>可重复读</code>（RepeatTable Read），同一个事务中多次读取同样的记录结果时结果相同。<br><code>可串行化</code>（Serializable），最高隔离级别，强制事务串行执行。</p>
+<h3 id="1-4-存储引擎"><a href="#1-4-存储引擎" class="headerlink" title="1.4 存储引擎"></a>1.4 存储引擎</h3><p><code>InnoDB</code> 引擎，最重要，使用最广泛的存储引擎。被用来设计处理大量短期事务，具有高性能和自动崩溃恢复的特性。</p>
+<p><code>MyISAM</code> 引擎，不支持事务和行级锁，崩溃后无法安全恢复。</p>
+<h2 id="2-创建时优化"><a href="#2-创建时优化" class="headerlink" title="2 创建时优化"></a>2 创建时优化</h2><h3 id="2-1-Schema和数据类型优化"><a href="#2-1-Schema和数据类型优化" class="headerlink" title="2.1 Schema和数据类型优化"></a>2.1 Schema和数据类型优化</h3><p><strong>整数</strong></p>
+<p>TinyInt,SmallInt,MediumInt,Int,BigInt 使用的存储8,16,24,32,64位存储空间。使用Unsigned表示不允许负数，可以使正数的上线提高一倍。</p>
+<p><strong>实数</strong></p>
+<p>Float, Double 支持近似的浮点运算。<br>Decimal 用于存储精确的小数。</p>
+<p><strong>字符串</strong></p>
+<p><code>VarChar</code>，存储变长的字符串。需要1或2个额外的字节记录字符串的长度。<br><code>Char</code>，定长，适合存储固定长度的字符串，如MD5值。<br><code>Blob</code>，<code>Text</code> 为了存储很大的数据而设计的。分别采用二进制和字符的方式。</p>
+<p><strong>时间类型</strong></p>
+<p><code>DateTime</code>，保存大范围的值，占8个字节。<br><code>TimeStamp</code>，推荐，与UNIX时间戳相同，占4个字节。</p>
+<p><strong>优化建议点</strong></p>
+<ul>
+<li>尽量使用对应的数据类型。比如，不要用字符串类型保存时间，用整型保存IP。</li>
+<li>选择更小的数据类型。能用TinyInt不用Int。</li>
+<li>标识列（identifier column），建议使用整型，不推荐字符串类型，占用更多空间，而且计算速度比整型慢。</li>
+<li>不推荐ORM系统自动生成的Schema，通常具有不注重数据类型，使用很大的VarChar类型，索引利用不合理等问题。</li>
+<li>真实场景混用范式和反范式。冗余高查询效率高，插入更新效率低；冗余低插入更新效率高，查询效率低。</li>
+<li>创建完全的独立的汇总表\缓存表，定时生成数据，用于用户耗时时间长的操作。对于精确度要求高的汇总操作，可以采用 历史结果+最新记录的结果 来达到快速查询的目的。</li>
+<li>数据迁移，表升级的过程中可以使用影子表的方式，通过修改原表的表名，达到保存历史数据，同时不影响新表使用的目的。</li>
+</ul>
+<h3 id="2-2-索引"><a href="#2-2-索引" class="headerlink" title="2.2 索引"></a>2.2 索引</h3><p>索引包含一个或多个列的值。MySql只能高效的利用索引的最左前缀列。索引的优势：</p>
+<ul>
+<li>减少查询扫描的数据量</li>
+<li>避免排序和零时表</li>
+<li>将随机IO变为顺序IO （顺序IO的效率高于随机IO）</li>
+</ul>
+<p><strong>B-Tree</strong></p>
+<p>使用最多的索引类型。采用B-Tree数据结构来存储数据（每个叶子节点都包含指向下一个叶子节点的指针，从而方便叶子节点的遍历）。B-Tree索引适用于全键值，键值范围，键前缀查找，支持排序。</p>
+<p>B-Tree索引限制：</p>
+<ul>
+<li>如果不是按照索引的最左列开始查询，则无法使用索引。</li>
+<li>不能跳过索引中的列。如果使用第一列和第三列索引，则只能使用第一列索引。</li>
+<li>如果查询中有个范围查询，则其右边的所有列都无法使用索引优化查询。</li>
+</ul>
+<p><strong>哈希索引</strong></p>
+<p>只有精确匹配索引的所有列，查询才有效。存储引擎会对所有的索引列计算一个哈希码，哈希索引将所有的哈希码存储在索引中，并保存指向每个数据行的指针。</p>
+<p>哈希索引限制：</p>
+<ul>
+<li>无法用于排序</li>
+<li>不支持部分匹配</li>
+<li>只支持等值查询如 = ,IN() ,不支持 &lt; &gt;</li>
+</ul>
+<p><strong>优化建议点</strong></p>
+<ul>
+<li>注意每种索引的适用范围和适用限制。</li>
+<li>索引的列如果是表达式的一部分或者是函数的参数，则失效。</li>
+<li>针对特别长的字符串，可以使用前缀索引，根据索引的选择性选择合适的前缀长度。</li>
+<li>使用多列索引的时候，可以通过 AND 和 OR 语法连接。</li>
+<li>重复索引没必要，如（A，B）和（A）重复。</li>
+<li>索引在where条件查询和group by语法查询的时候特别有效。</li>
+<li>将范围查询放在条件查询的最后，防止范围查询导致的右边索引失效的问题。</li>
+<li>索引最好不要选择过长的字符串，而且索引列也不宜为null。</li>
+</ul>
+<h2 id="3-查询时优化"><a href="#3-查询时优化" class="headerlink" title="3 查询时优化"></a>3 查询时优化</h2><h3 id="3-1-查询质量的三个重要指标"><a href="#3-1-查询质量的三个重要指标" class="headerlink" title="3.1 查询质量的三个重要指标"></a>3.1 查询质量的三个重要指标</h3><ul>
+<li>响应时间 （服务时间，排队时间）</li>
+<li>扫描的行</li>
+<li>返回的行</li>
+</ul>
+<h3 id="3-2-查询优化点"><a href="#3-2-查询优化点" class="headerlink" title="3.2 查询优化点"></a>3.2 查询优化点</h3><ul>
+<li>避免查询无关的列，如使用 Select * 返回所有的列。</li>
+<li>避免查询无关的行</li>
+<li>切分查询。将一个对服务器压力较大的任务，分解到一个较长的时间中，并分多次执行。如要删除一万条数据，可以分10次执行，每次执行完成后暂停一段时间，再继续执行。过程中可以释放服务器资源给其他任务。</li>
+<li>分解关联查询。将多表关联查询的一次查询，分解成对单表的多次查询。可以减少锁竞争，查询本身的查询效率也比较高。因为MySql的连接和断开都是轻量级的操作，不会由于查询拆分为多次，造成效率问题。</li>
+<li>注意count的操作只能统计不为null的列，所以统计总的行数使用count（*）。</li>
+<li>group by 按照标识列分组效率高，分组结果不宜出行分组列之外的列。</li>
+<li>关联查询延迟关联，可以根据查询条件先缩小各自要查询的范围，再关联。</li>
+<li><p>Limit分页优化。可以根据索引覆盖扫描，再根据索引列关联自身查询其他列。如</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">SELECT</span></span><br><span class="line"> <span class="hljs-keyword">id</span>,</span><br><span class="line"> <span class="hljs-keyword">NAME</span>,</span><br><span class="line"> age</span><br><span class="line"><span class="hljs-keyword">WHERE</span></span><br><span class="line"> student s1</span><br><span class="line"><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> (</span><br><span class="line"> <span class="hljs-keyword">SELECT</span></span><br><span class="line">     <span class="hljs-keyword">id</span></span><br><span class="line"> <span class="hljs-keyword">FROM</span></span><br><span class="line">     student</span><br><span class="line"> <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span></span><br><span class="line">     age</span><br><span class="line"> <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">50</span>,<span class="hljs-number">5</span></span><br><span class="line">) <span class="hljs-keyword">AS</span> s2 <span class="hljs-keyword">ON</span> s1.id = s2.id</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Union查询默认去重，如果不是业务必须，建议使用效率更高的 Union All</p>
+</li>
+</ul>
+<h3 id="补充内容"><a href="#补充内容" class="headerlink" title="补充内容"></a>补充内容</h3><blockquote>
+<p>1.条件中的字段类型和表结构类型不一致，mysql会自动加转换函数，导致索引作为函数中的参数失效。</p>
+</blockquote>
+<blockquote>
+<p>2.like查询前面部分未输入，以%开头无法命中索引。</p>
+</blockquote>
+<blockquote>
+<p>3.补充2个5.7版本的新特性：</p>
+</blockquote>
+<p><code>generated column</code> 就是数据库中这一列由其他列计算而得</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> triangle (sidea <span class="hljs-keyword">DOUBLE</span>, sideb <span class="hljs-keyword">DOUBLE</span>, area <span class="hljs-keyword">DOUBLE</span> <span class="hljs-keyword">AS</span> (sidea * sideb / <span class="hljs-number">2</span>));</span><br><span class="line"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> triangle(sidea, sideb) <span class="hljs-keyword">values</span>(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>);</span><br><span class="line"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> triangle;</span><br></pre></td></tr></table></figure>
+<figure class="highlight asciidoc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-code">+-------+</span>-------<span class="hljs-code">+------+</span></span><br><span class="line">| sidea | sideb | area |</span><br><span class="line"><span class="hljs-code">+-------+</span>-------<span class="hljs-code">+------+</span></span><br><span class="line">|   3   |   4   |  6   |</span><br><span class="line"><span class="hljs-code">+-------+</span>-------<span class="hljs-code">+------+</span></span><br></pre></td></tr></table></figure>
+<p>支持JSON格式数据，并提供相关内置函数</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> json_test (<span class="hljs-keyword">name</span> <span class="hljs-keyword">JSON</span>);</span><br><span class="line"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> json_test <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'&#123;"name1": "value1", "name2": "value2"&#125;'</span>);</span><br><span class="line"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> json_test <span class="hljs-keyword">WHERE</span> JSON_CONTAINS(<span class="hljs-keyword">name</span>, <span class="hljs-string">'$.name1'</span>);</span><br></pre></td></tr></table></figure>
+<p>关注explain在性能分析中的使用</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">EXPLAIN</span> <span class="hljs-keyword">SELECT</span> settleId <span class="hljs-keyword">FROM</span> Settle <span class="hljs-keyword">WHERE</span> settleId = <span class="hljs-string">"3679"</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/SQL性能优化梳理/pic-2.jpg" alt="图2" title="图2.jpg"></p>
+<ul>
+<li><code>select_type</code>，有几种值：simple（表示简单的select，没有union和子查询），primary（有子查询，最外面的select查询就是primary），union（union中的第二个或随后的select查询，不依赖外部查询结果），dependent union（union中的第二个或随后的select查询，依赖外部查询结果）</li>
+<li><code>type</code>，有几种值：system（表仅有一行（=系统表），这是const连接类型的一个特例），const（常量查询）, ref(非唯一索引访问，只有普通索引)，eq_ref（使用唯一索引或组件查询），all（全表查询），index（根据索引查询全表），range（范围查询）</li>
+<li><code>possible_keys</code>: 表中可能帮助查询的索引</li>
+<li><code>key</code>，选择使用的索引</li>
+<li><code>key_len</code>，使用的索引长度</li>
+<li><code>rows</code>，扫描的行数，越大越不好</li>
+<li><code>extra</code>，有几种值：Only index（信息从索引中检索出，比扫描表快），where used（使用where限制），Using filesort （可能在内存或磁盘排序），Using temporary（对查询结果排序时使用临时表）</li>
+</ul>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/mysql/">mysql</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/donate/alipay.png" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/donate/wechat.png" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/05/Dockerfile极简入门与实践/">
+                <span class="level-item">Dockerfile极简入门与实践</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
     </div>
 </div>
 
@@ -1029,7 +1052,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="刘庆龙 | Hekliu" height="28">
+                    <img src="/images/logo.png" alt="SQL性能优化梳理" height="28">
                 
 				
 				<span class="site-title">刘庆龙 | Hekliu</span>
