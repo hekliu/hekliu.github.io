@@ -2,7 +2,7 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>日志分析系统搭建 - 刘庆龙 | Hekliu</title>
+<title>Filebeat+Kafka+Logstash+ElasticSearch+Kibana日志分析系统搭建 - 刘庆龙 | Hekliu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
@@ -10,15 +10,15 @@
     <meta name="description" content="背景由于公司的项目部署在多台服务器上，日志被分散储存在不同的设备，想了解服务器的负荷，以及服务器性能安全性，或者系统出现问题了，使用传统的方法去查阅日志自然是繁琐，效率低，并且分析问题时不直观。当务之急，只有抽时间搭建集中化的日志分析管理系统。">
 <meta name="keywords" content="日志分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="日志分析系统搭建">
+<meta property="og:title" content="Filebeat+Kafka+Logstash+ElasticSearch+Kibana日志分析系统搭建">
 <meta property="og:url" content="https://hekliu.github.io/2019/10/22/日志分析系统搭建/index.html">
 <meta property="og:site_name" content="刘庆龙 | Hekliu">
 <meta property="og:description" content="背景由于公司的项目部署在多台服务器上，日志被分散储存在不同的设备，想了解服务器的负荷，以及服务器性能安全性，或者系统出现问题了，使用传统的方法去查阅日志自然是繁琐，效率低，并且分析问题时不直观。当务之急，只有抽时间搭建集中化的日志分析管理系统。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hekliu.github.io/images/side-imges/service-11.jpg">
-<meta property="og:updated_time" content="2019-10-22T03:41:16.705Z">
+<meta property="og:updated_time" content="2019-11-07T09:57:37.351Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="日志分析系统搭建">
+<meta name="twitter:title" content="Filebeat+Kafka+Logstash+ElasticSearch+Kibana日志分析系统搭建">
 <meta name="twitter:description" content="背景由于公司的项目部署在多台服务器上，日志被分散储存在不同的设备，想了解服务器的负荷，以及服务器性能安全性，或者系统出现问题了，使用传统的方法去查阅日志自然是繁琐，效率低，并且分析问题时不直观。当务之急，只有抽时间搭建集中化的日志分析管理系统。">
 <meta name="twitter:image" content="https://hekliu.github.io/images/side-imges/service-11.jpg">
 
@@ -90,7 +90,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="日志分析系统搭建" height="28">
+                <img src="/images/logo.png" alt="Filebeat+Kafka+Logstash+ElasticSearch+Kibana日志分析系统搭建" height="28">
             
 			
 			<span class="site-title">刘庆龙 | Hekliu</span>
@@ -139,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="/images/side-imges/service-11.jpg" alt="日志分析系统搭建">
+            <img class="thumbnail" src="/images/side-imges/service-11.jpg" alt="Filebeat+Kafka+Logstash+ElasticSearch+Kibana日志分析系统搭建">
         </span>
     </div>
     
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 667 个字)
+                    7 分钟 读完 (大约 1070 个字)
                 </span>
                 
                 
@@ -166,11 +166,13 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                日志分析系统搭建
+                Filebeat+Kafka+Logstash+ElasticSearch+Kibana日志分析系统搭建
             
         </h1>
         <div class="content">
             <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>由于公司的项目部署在多台服务器上，<code>日志</code>被分散储存在不同的设备，想了解服务器的负荷，以及服务器<code>性能</code>安全性，或者系统出现问题了，使用传统的方法去查阅日志自然是繁琐，效率低，并且分析问题时不直观。当务之急，只有抽时间搭建<code>集中化</code>的日志分析管理系统。<br><a id="more"></a></p>
+<h2 id="了解各组件的作用"><a href="#了解各组件的作用" class="headerlink" title="了解各组件的作用"></a>了解各组件的作用</h2><p><strong>Filebeat</strong>：是一个日志文件托运工具，在你的服务器上安装客户端后，filebeat会监控日志目录或者指定的日志文件，追踪读取这些文件(追踪文件的变化，不停的读)<br><strong>Kafka</strong>：是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据<br><strong>Logstash</strong>：是一根具备实时数据传输能力的管道，负责将数据信息从管道的输入端传输到管道的输出端;与此同时这根管道还可以让你根据自己的需求在中间加上滤网，<code>Logstash</code>提供了很多功能强大的滤网以满足你的各种应用场景<br><strong>ElasticSearch</strong>：它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口<br><strong>Kibana</strong>：是ElasticSearch的用户界面</p>
+<p>在实际应用场景下，为了满足大数据实时检索的场景，利用<code>Filebeat</code>去监控日志文件，将<code>Kafka</code>作为<code>Filebeat</code>的输出端，<code>Kafka</code>实时接收到<code>Filebeat</code>后以<code>Logstash</code>作为输出端输出，到<code>Logstash</code>的数据也许还不是我们想要的格式化或者特定业务的数据，这时可以通过<code>Logstash</code>的一些过了插件对数据进行过滤最后达到想要的数据格式以<code>ElasticSearch</code>作为输出端输出，数据到<code>ElasticSearch</code>就可以进行丰富的分布式检索了。</p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>服务器：10.13.0.92<br>服务器：10.13.0.93<br>操作系统：CentOS 6.X</p>
 <h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><p><img src="/images/日志分析系统搭建/pic-1.jpg" alt="技术选型" title="技术选型.jpg"></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="安装-filebeat"><a href="#安装-filebeat" class="headerlink" title="安装 filebeat"></a>安装 <code>filebeat</code></h3><ul>
@@ -588,14 +590,14 @@
             
             <a href="/2019/10/22/日志分析系统搭建/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/side-imges/service-11.jpg" alt="日志分析系统搭建">
+                    <img class="thumbnail" src="/images/side-imges/service-11.jpg" alt="Filebeat+Kafka+Logstash+ElasticSearch+Kibana日志分析系统搭建">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-22T01:45:04.000Z">2019-10-22</time></div>
-                    <a href="/2019/10/22/日志分析系统搭建/" class="title has-link-black-ter is-size-6 has-text-weight-normal">日志分析系统搭建</a>
+                    <a href="/2019/10/22/日志分析系统搭建/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Filebeat+Kafka+Logstash+ElasticSearch+Kibana日志分析系统搭建</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/日志分析/">日志分析</a>
                     </p>
@@ -849,14 +851,14 @@
             
             <a href="/2019/10/22/日志分析系统搭建/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/side-imges/service-11.jpg" alt="日志分析系统搭建">
+                    <img class="thumbnail" src="/images/side-imges/service-11.jpg" alt="Filebeat+Kafka+Logstash+ElasticSearch+Kibana日志分析系统搭建">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-22T01:45:04.000Z">2019-10-22</time></div>
-                    <a href="/2019/10/22/日志分析系统搭建/" class="title has-link-black-ter is-size-6 has-text-weight-normal">日志分析系统搭建</a>
+                    <a href="/2019/10/22/日志分析系统搭建/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Filebeat+Kafka+Logstash+ElasticSearch+Kibana日志分析系统搭建</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/日志分析/">日志分析</a>
                     </p>
@@ -1081,7 +1083,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="日志分析系统搭建" height="28">
+                    <img src="/images/logo.png" alt="Filebeat+Kafka+Logstash+ElasticSearch+Kibana日志分析系统搭建" height="28">
                 
 				
 				<span class="site-title">刘庆龙 | Hekliu</span>
